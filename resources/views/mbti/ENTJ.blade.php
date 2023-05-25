@@ -93,8 +93,8 @@
         <p class="text-indigo-900"><b>Sumber : </b><a class="italic" href="https://campuspedia.id/news/mengenal-16-tipe-kepribadian-mbti-lebih-dalam-part-1/" target="_blank" rel="noopener noreferrer">campuspedia.id</a></p>
         <div class="text-right text-indigo-900 mt-10">
             <p class="pb-16">Semarang, {{ now()->format('d M Y') }}</p>
-            <p>Muhammad Abdur Rofi</p>
-            <p>NIM : 1908096002</p>
+            {{-- <p>Muhammad Abdur Rofi</p>
+            <p>NIM : 1908096002</p> --}}
         </div>
         <div class="flex justify-center mb-20">
             <input id="printbtn" onclick="window.print();"

@@ -16,7 +16,7 @@
         <div x-data="{ open: false }"
             class="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8    ">
             <div class="p-4 flex flex-row items-center justify-between">
-                <a href="#"
+                <a href="/"
                     class="text-lg font-semibold tracking-widest text-gray-900 rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline">MBTI<span
                         class="ml-2 text-indigo-600">Test</span></a>
                 <button class="md:hidden rounded-lg focus:outline-none focus:shadow-outline" @click="open = !open">
@@ -38,8 +38,8 @@
                     href="#mbti">Apa itu MBTI</a>
                 <a class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
                     href="#panduan">Panduan</a>
-                <a class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
-                    href="#about">Tentang Kita</a>
+                {{-- <a class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                    href="#about">Tentang Kita</a> --}}
                 @if (Auth::check())
                     <a class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
                         href="/admin/logout">Logout</a>
@@ -71,15 +71,19 @@
     </div>
     <div class="min-h-screen flex justify-center items-center" id="mbti">
         <div class="container mx-auto p-10">
-            <h1 class="text-4xl font-bold from-current mb-8">Apa itu MBTI Test?</h1>
+            <h1 class="text-4xl font-bold from-current mb-8">Apa itu <i>Myers-Briggs Type Indicator</i> (MBTI) Test?</h1>
             <section class="text-gray-600 body-font">
                 <div class="container px-5 py-10 mx-auto">
                     <div class="flex flex-wrap -m-4">
-                        <p class="text-2xl font-semibold">MBTI adalah tes kepribadian dengan serangkaian pertanyaan
-                            tentang preferensi seseorang pada empat domain yang berbeda.</p>
+                        <p class="text-2md">Tes MBTI adalah sebuah uji kepribadian yang pertama kali diperkenalkan oleh <strong> Katharine Cook Briggs </strong> dan anaknya, <strong> Isabel Briggs Myers </strong> pada 1942.
+                            <br> Melalui tes MBTI, kamu bisa mengetahui bahwa kepribadian ada lebih banyak dari itu.
+                            <br> Tes MBTI membagi kepribadian seseorang berdasarkan beberapa dikotomi kategori, yaitu <strong> Introversion (I) </strong> vs <strong> Extraversion (E) </strong>, <strong> Intuitive (N) </strong> vs <strong> Sensory (S) </strong>, <strong> Thinking (T) </strong> vs <strong> Feeling (F) </strong>, dan <strong> Judging (J) </strong> vs <strong> Perceiving (P) </strong>.
+                            <br><br> Dari kombinasi 8 kategori tersebut, dihasilkan 16 tipe kepribadian yang bisa dimiliki oleh setiap orang.
+                            <br> Dengan berbagai tipe kepribadian itu, banyak perusahaan dan lembaga yang menjadikan tes MBTI sebagai salah satu tahap rekrutmennya.
+                        </p>
                         <p class="italic mt-2">sumber : <a
-                                href="https://akupintar.id/info-pintar/-/blogs/tes-mbti-16-tipe-kepribadian-klasifikasi-dan-penjelasannya"
-                                target="_blank" rel="noopener noreferrer">https://akupintar.id/</a></p>
+                                href="https://glints.com/id/lowongan/tes-mbti-adalah/"
+                                target="_blank" rel="noopener noreferrer">https://glints.com/id/lowongan/tes-mbti-adalah/</a></p>
                     </div>
                 </div>
             </section>
@@ -110,74 +114,6 @@
                             class="shadow-md py-3 px-5 rounded-md mb-3 hover:shadow-xl transform transition duration-500 hover:scale-105 border-2 border-indigo-400 hover:bg-indigo-600 hover:text-white hover:border-purple-50">
                             5. Setelah kamu selesai mengisi semua pertanyaan, kamu dapat mengetahui hasil tes
                             kepribadian ini .</div>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </div>
-    <div class="min-h-screen flex justify-center items-center" id="about">
-        <div class="container mx-auto p-10">
-            <h1 class="text-4xl font-bold from-current mb-8">Tentang Kita</h1>
-            <section class="text-gray-600 body-font">
-                <div class="container px-5 py-10 mx-auto">
-                    <div class="flex flex-wrap -m-4">
-                        <div class="p-4 lg:w-1/3 hover:shadow-xl transform transition duration-500 hover:scale-105">
-                            <div
-                                class="max-w-md px-8 py-4 mx-auto mt-16 bg-white rounded-lg shadow-lg dark:bg-gray-800 border-2 border-indigo-400">
-                                <div class="flex justify-center -mt-16 md:justify-end">
-                                    <img class="object-cover w-20 h-20 bg-white border-2 border-indigo-500 rounded-full dark:border-indigo-400"
-                                        alt="Testimonial avatar"
-                                        src="images/man.png">
-                                </div>
-
-                                <h2
-                                    class="mt-2 text-2xl font-semibold text-gray-800 dark:text-white md:mt-0 md:text-3xl">
-                                    Programmer</h2>
-                                <div class="flex justify-end mt-4">
-                                    <p href="#" class="text-xl font-medium text-indigo-500 dark:text-indigo-300">Abdur
-                                        Rofi</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="p-4 lg:w-1/3 hover:shadow-xl transform transition duration-500 hover:scale-105">
-                            <div
-                                class="max-w-md px-8 py-4 mx-auto mt-16 bg-white rounded-lg shadow-lg dark:bg-gray-800 border-2 border-indigo-400">
-                                <div class="flex justify-center -mt-16 md:justify-end">
-                                    <img class="object-cover w-20 h-20 bg-white border-2 border-indigo-500 rounded-full dark:border-indigo-400"
-                                        alt="Testimonial avatar"
-                                        src="images/moslem-woman.png">
-                                </div>
-
-                                <h2
-                                    class="mt-2 text-2xl font-semibold text-gray-800 dark:text-white md:mt-0 md:text-3xl">
-                                    Sistem Analis</h2>
-
-                                <div class="flex justify-end mt-4">
-                                    <p href="#" class="text-xl font-medium text-indigo-500 dark:text-indigo-300">
-                                        Khusarah Prasetyani</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="p-4 lg:w-1/3 hover:shadow-xl transform transition duration-500 hover:scale-105">
-                            <div
-                                class="max-w-md px-8 py-4 mx-auto mt-16 bg-white rounded-lg shadow-lg dark:bg-gray-800 border-2 border-indigo-400">
-                                <div class="flex justify-center -mt-16 md:justify-end">
-                                    <img class="object-cover w-20 h-20 border-2 bg-white border-indigo-500 rounded-full dark:border-indigo-400"
-                                        alt="Testimonial avatar"
-                                        src="images/moslem-woman (1).png">
-                                </div>
-
-                                <h2
-                                    class="mt-2 text-2xl font-semibold text-gray-800 dark:text-white md:mt-0 md:text-3xl">
-                                    Dokumenter</h2>
-
-                                <div class="flex justify-end mt-4">
-                                    <p href="#" class="text-xl font-medium text-indigo-500 dark:text-indigo-300">
-                                        Charissa
-                                        Tiara</p>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </section>

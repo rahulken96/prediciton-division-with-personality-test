@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\QuestionController;
 use App\Models\Question;
+use Illuminate\Support\Facades\Http;
+
 // use Illuminate\Support\Facades\Http;
 
 /*
@@ -20,15 +22,17 @@ use App\Models\Question;
 
 Route::prefix('')->group(function () {
     Route::get('/', function () {
-        // $responses = Http::get('https://api.quotable.io/quotes?maxLength=166');
         return view('users.home');
     });
+
     Route::get('/mulai-test-mbti', function () {
         $question = Question::all();
         return view('users.dashboard',['questions' => $question]);
     });
+
     Route::post('/hasil', [QuestionController::class, 'calculate']);
 });
+
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::get('/', function () {
         return redirect('admin/login');
