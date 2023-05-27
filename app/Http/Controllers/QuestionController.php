@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Question;
 use App\Models\Report;
 use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except('logout');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +20,8 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        //
+        $question = Question::all();
+        return view('users.dashboard', ['questions' => $question]);
     }
 
     /**
@@ -35,8 +42,8 @@ class QuestionController extends Controller
      */
     public function calculate(Request $request)
     {
-        $array = array_count_values($request->all());
         // return $request;
+        $array = array_count_values($request->all());
         $P = $array['P'] / 15 * 100;
         $I = $array['I'] / 15 * 100;
         $J = $array['J'] / 15 * 100;

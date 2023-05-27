@@ -22,15 +22,13 @@
                        </a>
                    </li>
                </ul>
-               @if (Request::is('admin/dashboard*'))
-                   <div class="px-6 my-6">
-                       <button @click="openModal"
-                           class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
-                           Create account
-                           <span class="ml-2" aria-hidden="true">+</span>
-                       </button>
-                   </div>
-               @endif
+               <div class="px-6 my-6">
+                   <button @click="openModal"
+                       class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                       Create account
+                       <span class="ml-2" aria-hidden="true">+</span>
+                   </button>
+               </div>
            </div>
        </aside>
        <!-- Mobile sidebar -->
@@ -101,7 +99,7 @@
                role="dialog" id="modal">
                <!-- Modal body -->
                @csrf
-               <form action="register" method="post">
+               <form action="{{ route('admin.dashboard') }}" method="post">
                    {{ csrf_field() }}
                    <div class="mt-4 mb-6">
                        <!-- Modal title -->
