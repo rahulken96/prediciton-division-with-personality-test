@@ -5,9 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\UserController;
-use App\Models\Question;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Http;
+use App\Models\Report;
 
 // use Illuminate\Support\Facades\Http;
 
@@ -21,10 +19,10 @@ use Illuminate\Support\Facades\Http;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () { return view('users.home'); })->name('home');
+Route::get('/', [QuestionController::class, 'index'])->name('home')->withoutMiddleware('auth');
 
 Route::get('/test', function(){
-    // dd (Auth::user()->isAdmin == 1);
+    // return Report::distinct('nama')->count('nama');
 });
 
 Route::middleware('auth')->group(function () {
@@ -34,8 +32,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/register', [UserController::class, 'create'])->name('register')->withoutMiddleware('auth');
     Route::post('/register', [UserController::class, 'register'])->withoutMiddleware('auth');
 
-    Route::get('/mulai-test-mbti', [QuestionController::class, 'index'])->name('test');
-    Route::post('/hasil', [QuestionController::class, 'calculate']);
+    Route::get('/test', [QuestionController::class, 'create'])->name('test');
+    Route::post('/hasil', [QuestionController::class, 'store'])->name('result');
 
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');

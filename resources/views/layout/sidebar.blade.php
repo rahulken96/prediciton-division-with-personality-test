@@ -1,9 +1,10 @@
        <!-- Desktop sidebar -->
        <aside class="z-20 hidden w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block flex-shrink-0">
            <div class="py-4 text-gray-500 dark:text-gray-400">
-               <a class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200" href="#">
-                   MBTI Admin
-               </a>
+                <a class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200" href="{{ route('home') }}">
+                    <span class="ml-2" style="color: #00BFA6">MBTI</span>
+                </a>
+                <span class="text-lg font-bold text-gray-800 dark:text-gray-200">Admin</span>
                <ul class="mt-6">
                    <li class="relative px-6 py-3">
                        <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
@@ -83,6 +84,7 @@
                </div>
            </div>
        </aside>
+
        <!-- Modal backdrop. This what you want to place close to the closing body tag -->
        <div x-show="isModalOpen" x-transition:enter="transition ease-out duration-150"
            x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"

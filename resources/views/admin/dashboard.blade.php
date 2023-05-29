@@ -2,7 +2,7 @@
 <html :class="{ 'theme-dark': dark }" x-data="data()" ang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    @include('layout.head', ['title' => 'Mulai Test'])
+    @include('layout.head', ['title' => 'Admin'])
     <link href="{{ asset('css/Chart.min.css') }}" rel="stylesheet">
     <script src="{{ asset('js/Chart.min.js') }}"></script>
     <script src="{{ asset('js/charts-lines.js') }}" defer></script>

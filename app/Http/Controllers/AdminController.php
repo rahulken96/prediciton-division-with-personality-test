@@ -22,6 +22,10 @@ class AdminController extends Controller
      */
     public function index()
     {
+        if (auth()->user()->isAdmin != 1) {
+            return redirect()->back()->with('gagal', 'Harap Mengganti Akun Terlebih Dahulu !');
+        }
+
         $data = [
             'userCount'     => User::count(),
             'reportCount'   => Report::count(),

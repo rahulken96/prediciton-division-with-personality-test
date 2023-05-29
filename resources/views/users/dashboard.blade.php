@@ -11,21 +11,21 @@
     <div class="flex items-center justify-center">
         <div class="container">
             @csrf
-            <form action="/hasil" method="post">
-                {{ csrf_field() }}
+            <form action="{{ route('result') }}" method="post">
+                @csrf
                 <div class="w-full mb-8 mt-5 overflow-hidden ">
                     <div class="w-full overflow-x-auto">
                         <div class="swiper mySwiper">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
                                     <div class="flex justify-center w-full h-screen items-center">
-                                        <input type="text" name="nama" id="nama" placeholder="Nama Anda"
-                                            class="block mb-2 p-2 rounded-md border-2 border-indigo-500 shadow-md focus:outline-none focus:border-indigo-600 text-center uppercase"
-                                            maxlength="10" required>
+                                        <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-4 rounded"
+                                            href="{{ route('home') }}">Kembali</a>
                                     </div>
                                 </div>
                                 @php
                                     $begin = 0;
+                                    $no = 1;
                                 @endphp
                                 @for ($i = 0; $i < count($questions) / 3; $i++)
                                     <div class="swiper-slide">
@@ -33,7 +33,7 @@
                                             <div class="flex justify-center my-4 w-full cursor-pointer">
                                                 <div class="flex-row w-1/2">
                                                     <p class="my-3">
-                                                        {{ $question->id }}.{{ $question->pertanyaan }}
+                                                        {{ $no++ }}.{{ $question->pertanyaan }}
                                                     </p>
                                                     <div
                                                         class="rounded-md shadow-md py-3 px-4 w-full mb-3 border-solid border-2 border-indigo-500 transform transition duration-500  hover:-translate-y-1">
@@ -61,8 +61,7 @@
                                 @endfor
                                 <div class="swiper-slide">
                                     <div class="flex justify-center h-screen items-center">
-                                        <input type="submit"
-                                            class="transform transition duration-500 hover:scale-105 hover:-translate-y-1 bg-indigo-600 hover:scale-11 hover:bg-indigo-800 text-white py-3 px-6 rounded-md"
+                                        <input type="submit" class="transform transition duration-500 hover:scale-105 hover:-translate-y-1 bg-indigo-600 hover:scale-11 hover:bg-indigo-800 text-white py-3 px-6 rounded-md"
                                             value="Lihat hasil">
                                     </div>
                                 </div>

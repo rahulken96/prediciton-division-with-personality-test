@@ -10,7 +10,7 @@ class QuestionController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except('logout');
+        $this->middleware('auth')->except('login');
     }
 
     /**
@@ -20,8 +20,8 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        $question = Question::all();
-        return view('users.dashboard', ['questions' => $question]);
+        $jmlOrang = Report::distinct('nama')->count('nama');
+        return view('users.home', compact('jmlOrang'));
     }
 
     /**
@@ -31,7 +31,12 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        //
+        if (auth()->user()->isAdmin == 1) {
+            return redirect()->back()->with('gagal', 'Harap Mengganti Akun Terlebih Dahulu !');
+        }
+
+        $question = Question::all();
+        return view('users.dashboard', ['questions' => $question]);
     }
 
     /**
@@ -40,7 +45,7 @@ class QuestionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function calculate(Request $request)
+    public function store(Request $request)
     {
         // return $request;
         $array = array_count_values($request->all());
@@ -57,18 +62,25 @@ class QuestionController extends Controller
         $tiga = $T > $F ? "T" : "F";
         $empat = $J > $P ? "J" : "P";
         $hasil = $satu . $dua . $tiga . $empat;
-        $nama = $request->nama;
+
+        /* Proses Inisiasi Data */
         $reports = new Report();
-        $reports->nama = $nama;
-        $reports->P = $P;
-        $reports->I = $I;
-        $reports->J = $J;
-        $reports->T = $T;
-        $reports->E = $E;
-        $reports->N = $N;
-        $reports->S = $S;
-        $reports->F = $F;
+        $nama = auth()->user()->name;
+        $email = auth()->user()->email;
+
+        $reports->nama  = $nama;
+        $reports->email = $email;
+        $reports->P     = $P;
+        $reports->I     = $I;
+        $reports->J     = $J;
+        $reports->T     = $T;
+        $reports->E     = $E;
+        $reports->N     = $N;
+        $reports->S     = $S;
+        $reports->F     = $F;
         $reports->result = $hasil;
+        /* Selesai, setelah itu pengecekan data untuk disimpan */
+
         if ($reports->save()) {
             return view('mbti.'.$hasil.'', [
                 'nama' => $nama,
@@ -83,6 +95,8 @@ class QuestionController extends Controller
                 'F' => $F
             ]);
         }
+
+        return redirect(route('home'))->with('gagal', 'Harap Mengganti Akun Terlebih Dahulu !');
     }
 
     /**

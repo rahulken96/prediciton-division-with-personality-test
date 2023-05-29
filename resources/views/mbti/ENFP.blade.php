@@ -92,14 +92,13 @@
         <p class="text-indigo-900"><b>Tokoh Terkenal</b> : Bob Dylan, Will Smith, Robin Williams</p>
         <p class="text-indigo-900"><b>Sumber : </b><a class="italic" href="https://campuspedia.id/news/mengenal-16-tipe-kepribadian-mbti-lebih-dalam-part-1/" target="_blank" rel="noopener noreferrer">campuspedia.id</a></p>
         <div class="text-right text-indigo-900 mt-10">
-            <p class="pb-16">Semarang, {{ now()->format('d M Y') }}</p>
+            <p class="pb-16">Indramayu, {{ now()->format('d M Y') }}</p>
             {{-- <p>Muhammad Abdur Rofi</p>
             <p>NIM : 1908096002</p> --}}
         </div>
         <div class="flex justify-center mb-20">
-            <input id="printbtn" onclick="window.print();"
-                class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" type="button"
-                value="PRINT 🖨️">
+            <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-4 rounded" href="{{ route('home') }}">Kembali</a>
+            <input id="printbtn" onclick="window.print();" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" type="button" value="Cetak 🖨️">
         </div>
     </div>
 </body>
