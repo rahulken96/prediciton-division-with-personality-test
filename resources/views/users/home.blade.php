@@ -16,8 +16,11 @@
         <div x-data="{ open: false }"
             class="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8    ">
             <div class="p-4 flex flex-row items-center justify-between">
-                <span class="text-lg font-semibold tracking-widest text-gray-900 rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline">Sebanyak<span
-                        class="ml-2" style="color: #00BFA6">{{ $jmlOrang }} Orang</span> Telah Menggunakan Test Ini !!</span>
+                @if ($jmlOrang == 0)
+                    <span class="text-lg font-semibold tracking-widest text-gray-900 rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline">Jadilah<span class="ml-2" style="color: #00BFA6">Orang Pertama</span> Yang Melakukan Test Ini !!</span>
+                @else
+                    <span class="text-lg font-semibold tracking-widest text-gray-900 rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline">Sebanyak<span class="ml-2" style="color: #00BFA6">{{ $jmlOrang }} Orang</span> Telah Menggunakan Test Ini !!</span>
+                @endif
                 <button class="md:hidden rounded-lg focus:outline-none focus:shadow-outline" @click="open = !open">
                     <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
                         <path x-show="!open" fill-rule="evenodd"
@@ -37,7 +40,11 @@
                     href="#panduan">Panduan</a>
                 @if (Auth::check())
                     <a class="px-4 py-2 text-sm font-semibold bg-transparent rounded-lg border-2 bg-green-400 md:mt-0 md:ml-4 active:bg-green-600 hover:bg-green-400 hover:text-white transform hover:scale-110 hover:border-green-50 transition duration-400"
-                        href="{{ route('logout') }}">Logout</a>
+                        href="{{ route('logout') }}">Keluar</a>
+                @else
+                    <a class="px-4 py-2 text-sm font-semibold bg-transparent rounded-lg border-2 bg-green-400 md:mt-0 md:ml-4 active:bg-green-600 hover:bg-green-400 hover:text-white transform hover:scale-110 hover:border-green-50 transition duration-400"
+                        href="{{ route('login') }}">Masuk / Daftar</a>
+
                 @endif
             </nav>
         </div>
@@ -80,9 +87,7 @@
                             <br><br> Dari kombinasi 8 kategori tersebut, dihasilkan 16 tipe kepribadian yang bisa dimiliki oleh setiap orang.
                             <br> Dengan berbagai tipe kepribadian itu, banyak perusahaan dan lembaga yang menjadikan tes MBTI sebagai salah satu tahap rekrutmennya.
                         </p>
-                        <p class="italic mt-2">sumber : <a
-                                href="https://glints.com/id/lowongan/tes-mbti-adalah/"
-                                target="_blank" rel="noopener noreferrer">https://glints.com/id/lowongan/tes-mbti-adalah/</a></p>
+                        <p class="italic mt-2">sumber : <a href="https://glints.com/id/lowongan/tes-mbti-adalah/" target="_blank">Glints.com - Pelajari Tipe Kepribadianmu dengan Tes MBTI (Meyers-Briggs Type Indicator)</a></p>
                     </div>
                 </div>
             </section>
@@ -146,8 +151,21 @@
         <script>
             $(function() {
                 Swal.fire({
-                    icon: 'warning',
+                    icon: 'error',
                     title: '{{ session('gagal') }}',
+                    showConfirmButton: false,
+                    timerProgressBar: true,
+                    timer: 2000
+                })
+            });
+        </script>
+    @endif
+    @if (session('info'))
+        <script>
+            $(function() {
+                Swal.fire({
+                    icon: 'warning',
+                    title: '{{ session('info') }}',
                     showConfirmButton: false,
                     timerProgressBar: true,
                     timer: 2000

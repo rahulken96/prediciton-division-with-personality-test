@@ -16,6 +16,7 @@ class CreateReportsTable extends Migration
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
+            $table->string('email');
             $table->integer('P');
             $table->integer('I');
             $table->integer('J');
@@ -24,7 +25,7 @@ class CreateReportsTable extends Migration
             $table->integer('N');
             $table->integer('S');
             $table->integer('F');
-            $table->char('result', 10);
+            $table->char('result', 4);
             $table->timestamps();
         });
     }

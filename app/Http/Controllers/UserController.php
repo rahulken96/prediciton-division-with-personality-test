@@ -5,19 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 use App\Models\User;
-use App\Models\Question;
-use App\Models\Report;
 
 class UserController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('guest')->except('logout');
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +18,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('users.login');
+        if (!auth()->check()) {
+            return view('users.login');
+        }
+
+        return redirect(route('home'))->with('info', 'Anda Telah Masuk Akun !');
     }
 
     /**
@@ -141,18 +138,19 @@ class UserController extends Controller
         $user->password = Hash::make($request->password);
         $user->isAdmin  = 0;
         $user->email_verified_at = \Carbon\Carbon::now();
+        $user->remember_token = Str::random(10);
 
         if ($user->save()) {
-            return redirect(route('login'))->with('berhasil','Pendaftaran Berhasil, Silahkan Masuk !');
+            return redirect(route('login'))->with('berhasil', 'Pendaftaran Berhasil, Silahkan Masuk !');
         }
 
-        return back()->with('gagal','Pendaftaran Gagal !');
+        return back()->with('gagal', 'Pendaftaran Gagal !');
     }
 
     public function logout()
     {
         // menghapus session yang aktif
         Auth::logout();
-        return redirect(route('home'))->with('berhasil','Anda Telah Keluar Akun !');
+        return redirect(route('home'))->with('berhasil', 'Anda Telah Keluar Akun !');
     }
 }

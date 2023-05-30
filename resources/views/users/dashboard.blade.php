@@ -4,7 +4,8 @@
 <head>
     @include('layout.head', ['title' => 'Mulai Test'])
     <!--  Swiper's CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="{{ asset('css/swiper-bundle.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/custom-radio.css') }}" />
 </head>
 
 <body>
@@ -35,22 +36,28 @@
                                                     <p class="my-3">
                                                         {{ $no++ }}.{{ $question->pertanyaan }}
                                                     </p>
-                                                    <div
-                                                        class="rounded-md shadow-md py-3 px-4 w-full mb-3 border-solid border-2 border-indigo-500 transform transition duration-500  hover:-translate-y-1">
-                                                        <input type="radio" name="{{ $question->id }}"
-                                                            id="{{ $question->type_satu }}"
-                                                            value="{{ $question->type_satu }}" required>
-                                                        <label
-                                                            for="{{ $question->type_satu }}">{{ $question->jawaban_satu }}</label>
-                                                    </div>
-                                                    <div
-                                                        class="rounded-md shadow-md py-3 px-4 w-full border-solid border-2 border-indigo-500 transform transition duration-500  hover:-translate-y-1">
-                                                        <input type="radio" name="{{ $question->id }}"
-                                                            id="{{ $question->type_dua }}"
-                                                            value="{{ $question->type_dua }}">
-                                                        <label
-                                                            for="{{ $question->type_dua }}">{{ $question->jawaban_dua }}</label>
-                                                    </div>
+                                                    <label for="" style="color: #00bf4c">Sangat Setuju</label>
+                                                    <label class="custom-radio-btn">
+                                                        <input type="radio" name="{{ $question->id }}" id="{{ $question->type_satu }}" value="5{{ $question->type_satu }}">
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                    <label class="custom-radio-btn">
+                                                        <input type="radio" name="{{ $question->id }}" id="{{ $question->type_satu }}" value="4{{ $question->type_satu }}">
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                    <label class="custom-radio-btn">
+                                                        <input type="radio" name="{{ $question->id }}" id="{{ $question->type_satu }}" value="3{{ $question->type_satu }}">
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                    <label class="custom-radio-btn">
+                                                        <input type="radio" name="{{ $question->id }}" id="{{ $question->type_satu }}" value="2{{ $question->type_satu }}">
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                    <label class="custom-radio-btn">
+                                                        <input type="radio" name="{{ $question->id }}" id="{{ $question->type_satu }}" value="1{{ $question->type_satu }}">
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                    <label for="" style="color: #bf0d00" class="ml-3">Sangat Tidak Setuju</label>
                                                 </div>
                                             </div>
                                         @endforeach
@@ -85,7 +92,7 @@
             </footer>
         </div>
         <!-- Swiper JS -->
-        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+        <script src="{{ asset('js/swiper-bundle.min.js') }}"></script>
         <script>
             var swiper = new Swiper('.mySwiper', {
                 navigation: {

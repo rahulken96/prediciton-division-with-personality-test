@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Question;
 use App\Models\Report;
+use App\Models\Result;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 class QuestionController extends Controller
 {
@@ -47,53 +50,99 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        // return $request;
-        $array = array_count_values($request->all());
-        $P = $array['P'] / 15 * 100;
-        $I = $array['I'] / 15 * 100;
-        $J = $array['J'] / 15 * 100;
-        $T = $array['T'] / 15 * 100;
-        $E = $array['E'] / 15 * 100;
-        $N = $array['N'] / 15 * 100;
-        $S = $array['S'] / 15 * 100;
-        $F = $array['F'] / 15 * 100;
+        $request = Arr::except($request->all(), '_token');
+        $P = 0;
+        $I = 0;
+        $J = 0;
+        $E = 0;
+        $T = 0;
+        $N = 0;
+        $S = 0;
+        $F = 0;
+
+        /* Proses Hitung Data */
+        foreach ($request as $value) {
+            $huruf = substr(Str::upper($value), 1, 2);
+            $angka = substr(Str::upper($value), 0, 1);
+
+            if ($huruf == 'P') {
+                $P += $angka;
+            }
+            if ($huruf == 'I') {
+                $I += $angka;
+            }
+            if ($huruf == 'J') {
+                $J += $angka;
+            }
+            if ($huruf == 'E') {
+                $E += $angka;
+            }
+            if ($huruf == 'T') {
+                $T += $angka;
+            }
+            if ($huruf == 'N') {
+                $N += $angka;
+            }
+            if ($huruf == 'S') {
+                $S += $angka;
+            }
+            if ($huruf == 'F') {
+                $F += $angka;
+            }
+        }
+
+        $P = (($P / (totalSoal('P') * 5)) * 100) ?? 0;
+        $I = (($I / (totalSoal('I') * 5)) * 100) ?? 0;
+        $J = (($J / (totalSoal('J') * 5)) * 100) ?? 0;
+        $E = (($E / (totalSoal('E') * 5)) * 100) ?? 0;
+        $T = (($T / (totalSoal('T') * 5)) * 100) ?? 0;
+        $N = (($N / (totalSoal('N') * 5)) * 100) ?? 0;
+        $S = (($S / (totalSoal('S') * 5)) * 100) ?? 0;
+        $F = (($F / (totalSoal('F') * 5)) * 100) ?? 0;
+
         $satu = $I > $E ? "I" : "E";
-        $dua = $S > $N ? "S" : "N";
+        $dua = $N > $S ? "N" : "S";
         $tiga = $T > $F ? "T" : "F";
         $empat = $J > $P ? "J" : "P";
         $hasil = $satu . $dua . $tiga . $empat;
+        /* Selesai Proses */
 
         /* Proses Inisiasi Data */
         $reports = new Report();
         $nama = auth()->user()->name;
         $email = auth()->user()->email;
 
-        $reports->nama  = $nama;
-        $reports->email = $email;
+        $reports->nama  = (!empty($nama) || $nama != null ? $nama : '?');
+        $reports->email = (!empty($email) || $email != null ? $email : '?');
         $reports->P     = $P;
         $reports->I     = $I;
         $reports->J     = $J;
-        $reports->T     = $T;
         $reports->E     = $E;
+        $reports->T     = $T;
         $reports->N     = $N;
         $reports->S     = $S;
         $reports->F     = $F;
         $reports->result = $hasil;
-        /* Selesai, setelah itu pengecekan data untuk disimpan */
 
+        $penjelasan = Result::where('mbti', $hasil)->first();
+        $data = [
+            'nama'       => $nama,
+            'email'      => $email,
+            'hasil'      => $hasil,
+            'penjelasan' => $penjelasan,
+            'P'          => $P,
+            'I'          => $I,
+            'J'          => $J,
+            'T'          => $T,
+            'E'          => $E,
+            'N'          => $N,
+            'S'          => $S,
+            'F'          => $F
+        ];
+
+        /* Selesai, setelah itu pengecekan data untuk disimpan */
         if ($reports->save()) {
-            return view('mbti.'.$hasil.'', [
-                'nama' => $nama,
-                'hasil' => $hasil,
-                'P' => $P,
-                'I' => $I,
-                'J' => $J,
-                'T' => $T,
-                'E' => $E,
-                'N' => $N,
-                'S' => $S,
-                'F' => $F
-            ]);
+            return view('mbti.hasil', $data);
         }
 
         return redirect(route('home'))->with('gagal', 'Harap Mengganti Akun Terlebih Dahulu !');
