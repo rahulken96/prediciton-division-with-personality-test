@@ -21,16 +21,6 @@
                 @else
                     <span class="text-lg font-semibold tracking-widest text-gray-900 rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline">Sebanyak<span class="ml-2" style="color: #00BFA6">{{ $jmlOrang }} Orang</span> Telah Menggunakan Test Ini !!</span>
                 @endif
-                <button class="md:hidden rounded-lg focus:outline-none focus:shadow-outline" @click="open = !open">
-                    <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
-                        <path x-show="!open" fill-rule="evenodd"
-                            d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
-                            clip-rule="evenodd"></path>
-                        <path x-show="open" fill-rule="evenodd"
-                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                            clip-rule="evenodd"></path>
-                    </svg>
-                </button>
             </div>
             <nav :class="{'flex': open, 'hidden': !open}"
                 class="flex-col flex-grow pb-4 md:pb-0 hidden md:flex md:justify-end md:flex-row ">
@@ -38,14 +28,21 @@
                     href="#mbti">Apa itu MBTI</a>
                 <a class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
                     href="#panduan">Panduan</a>
-                @if (Auth::check())
-                    <a class="px-4 py-2 text-sm font-semibold bg-transparent rounded-lg border-2 bg-green-400 md:mt-0 md:ml-4 active:bg-green-600 hover:bg-green-400 hover:text-white transform hover:scale-110 hover:border-green-50 transition duration-400"
-                        href="{{ route('logout') }}">Keluar</a>
+                @auth
+                    @if(Auth::user()->isAdmin == 1)
+                        <a class="px-4 py-2 text-sm font-semibold bg-transparent rounded-lg border-2 bg-green-400 md:mt-0 md:ml-4 active:bg-green-600 hover:bg-green-400 hover:text-white transform hover:scale-110 hover:border-green-50 transition duration-400"
+                            href="{{ route('admin.dashboard') }}">Dashboard
+                        </a>
+                    @else
+                        <a class="px-4 py-2 text-sm font-semibold bg-transparent rounded-lg border-2 bg-green-400 md:mt-0 md:ml-4 active:bg-green-600 hover:bg-green-400 hover:text-white transform hover:scale-110 hover:border-green-50 transition duration-400"
+                            href="{{ route('users.dashboard') }}">Dashboard
+                        </a>
+                    @endif
                 @else
                     <a class="px-4 py-2 text-sm font-semibold bg-transparent rounded-lg border-2 bg-green-400 md:mt-0 md:ml-4 active:bg-green-600 hover:bg-green-400 hover:text-white transform hover:scale-110 hover:border-green-50 transition duration-400"
-                        href="{{ route('login') }}">Masuk / Daftar</a>
-
-                @endif
+                        href="{{ route('login') }}">Masuk / Daftar
+                    </a>
+                @endauth
             </nav>
         </div>
     </div>
@@ -123,7 +120,7 @@
             </section>
         </div>
     </div>
-    <footer class="footer bg-white relative pt-1 border-b-2 border-green-700">
+    {{-- <footer class="footer bg-white relative pt-1 border-b-2 border-green-700">
         <div class="container mx-auto">
             <div class="mt-16 border-t-2 border-gray-300 flex flex-col items-center">
                 <div class="sm:w-2/3 text-center py-6">
@@ -133,7 +130,7 @@
                 </div>
             </div>
         </div>
-    </footer>
+    </footer> --}}
     @if (session('berhasil'))
         <script>
             $(function() {

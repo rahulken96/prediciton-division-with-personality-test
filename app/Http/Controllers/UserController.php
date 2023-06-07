@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Report;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -52,9 +53,27 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        $data = [
+            'reportCount'   => Report::count(),
+        ];
+
+        return view('users.dashboard', $data);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function report()
+    {
+        $data = [
+            'reportCount'   => Report::where('nama', Auth::user()->name)->get(),
+        ];
+
+        return view('users.report', $data);
     }
 
     /**

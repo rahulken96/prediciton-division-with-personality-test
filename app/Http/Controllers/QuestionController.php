@@ -39,7 +39,7 @@ class QuestionController extends Controller
         }
 
         $question = Question::all();
-        return view('users.dashboard', ['questions' => $question]);
+        return view('users.quiz', ['questions' => $question]);
     }
 
     /**

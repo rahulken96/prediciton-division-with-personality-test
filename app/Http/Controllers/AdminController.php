@@ -27,7 +27,8 @@ class AdminController extends Controller
         }
 
         $data = [
-            'userCount'     => User::count(),
+            'adminCount'    => User::where('isAdmin', 1)->count(),
+            'userCount'     => User::where('isAdmin', 0)->count(),
             'reportCount'   => Report::count(),
             'questionCount' => Question::count(),
         ];

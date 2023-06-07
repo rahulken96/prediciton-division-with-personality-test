@@ -21,18 +21,18 @@
                         Dashboard
                     </h2>
                     <!-- Cards -->
-                    <div class="grid gap-3 mb-8 md:grid-cols-3 xl:grid-cols-3">
+                    <div class="grid gap-3 mb-8 md:grid-cols-2 xl:grid-cols-3">
                         <!-- Card -->
                         <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
                             <div class="p-3 mr-4 text-red-500 dark:text-red-300">
-                                <i class="material-icons">person</i>
+                                <i class="material-icons">admin_panel_settings</i>
                             </div>
                             <div>
                                 <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                                    Total Admin
+                                    Total Akun Admin
                                 </p>
                                 <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-                                    {{$userCount}}
+                                    {{$adminCount}}
                                 </p>
                             </div>
                         </div>
@@ -43,7 +43,21 @@
                             </div>
                             <div>
                                 <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                                    Total Audience
+                                    Total Akun Penjawab
+                                </p>
+                                <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
+                                    {{$userCount}}
+                                </p>
+                            </div>
+                        </div>
+                        <!-- Card -->
+                        <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+                            <div class="p-3 mr-4 text-green-500 dark:text-green-300">
+                                <i class="material-icons">assignment</i>
+                            </div>
+                            <div>
+                                <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
+                                    Total Laporan Hasil
                                 </p>
                                 <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
                                     {{$reportCount}}
@@ -53,11 +67,11 @@
                         <!-- Card -->
                         <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
                             <div class="p-3 mr-4 text-green-500 dark:text-green-300">
-                                <i class="material-icons">chat</i>
+                                <i class="material-icons">quiz</i>
                             </div>
                             <div>
                                 <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                                    Total Question
+                                    Total Pertanyaan
                                 </p>
                                 <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
                                     {{$questionCount}}

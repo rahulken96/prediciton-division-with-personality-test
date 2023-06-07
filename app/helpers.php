@@ -5,7 +5,7 @@ use Illuminate\Support\Str;
 
 function totalSoal($kepribadian)
 {
-    return Question::where('type_satu', Str::upper($kepribadian))->count('type_satu') ?? '0';
+    return Question::where('type', Str::upper($kepribadian))->count('type') ?? '1';
 }
 
 function itunganSoal($nilai)

@@ -35,18 +35,22 @@ Route::middleware('auth')->group(function () {
     Route::get('/test', [QuestionController::class, 'create'])->name('test');
     Route::post('/hasil', [QuestionController::class, 'store'])->name('result');
 
+    Route::prefix('user')->name('users.')->group(function () {
+        Route::get('/dashboard', [UserController::class, 'show'])->name('dashboard');
+        Route::get('/report', [UserController::class, 'report'])->name('report');
+    });
+
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
+        Route::get('/report', function () { return view('admin.report'); })->name('report');
+
         Route::post('/register', [AdminController::class, 'register']);
 
-        Route::get('/post', function () { return view('admin.post'); })->name('post');
-        Route::get('/post/add', function () { return view('admin.post'); })->name('post.add');
-        Route::get('/post/edit/{id}', [PostController::class, 'edit'])->name('post.edit');
-        Route::post('/post/edit/{id}', [PostController::class, 'update']);
-        Route::post('/post/add', [PostController::class, 'store']);
-
-        Route::get('/report', function () { return view('admin.report'); })->name('report');
-        Route::get('/questions', function () { return view('admin.questions'); })->name('questions');
+        // Route::get('/post', function () { return view('admin.post'); })->name('post');
+        // Route::get('/post/add', function () { return view('admin.post'); })->name('post.add');
+        // Route::get('/post/edit/{id}', [PostController::class, 'edit'])->name('post.edit');
+        // Route::post('/post/edit/{id}', [PostController::class, 'update']);
+        // Route::post('/post/add', [PostController::class, 'store']);
     });
 
     Route::get('/logout', [UserController::class, 'logout'])->name('logout');

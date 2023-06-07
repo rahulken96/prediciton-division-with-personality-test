@@ -32,8 +32,8 @@
 
 <body>
     <div class="container w-full mx-auto">
-        <p class="text-center text-2xl font-bold mt-10 text-indigo-900">HASIL TEST MBTI - MBTI TEST</p>
-        <p class="mt-10 text-lg text-indigo-900">Nama : {{ $nama ?? '?' }}</p>
+        <p class="text-center text-2xl font-bold mt-10 text-indigo-900">Hasil Tes MBTI</p>
+        <p class="mt-3 text-lg text-indigo-900">Nama : {{ $nama ?? '?' }}</p>
         <p class="text-lg text-indigo-900">Email : {{ $email ?? '@?' }}</p>
         <p class="mt-3 text-lg text-indigo-900">Tipe Kepribadian : {{ $hasil ?? '' }}</p>
         <table class="border-2 w-full mt-3 mb-5">
@@ -93,7 +93,7 @@
         <p class="text-indigo-900"><b>Partner</b> : {{ $penjelasan['partner'] ?? 'NULL' }}</p>
         <p class="text-indigo-900"><b>Tokoh Terkenal</b> : {{ $penjelasan['tokoh_terkenal'] ?? 'NULL' }}</p>
         <p class="text-indigo-900"><b>Sumber : </b><a class="italic" href="https://campuspedia.id/news/mengenal-16-tipe-kepribadian-mbti-lebih-dalam-part-1/" target="_blank" rel="noopener noreferrer">campuspedia.id</a></p>
-        <div class="text-right text-indigo-900 mt-20">
+        <div class="text-right text-indigo-900">
             <p class="pb-16">{{ now()->format('d M Y') }}</p>
             <p>{{ $nama ?? '?' }}</p>
             <p>{{ $email ?? '@?' }}</p>
