@@ -25,6 +25,10 @@
                     display: none !important;
                 }
 
+                #backbtn{
+                    display: none !important;
+                }
+
             }
         </style>
     </head>
@@ -45,43 +49,43 @@
             <tbody>
                 <tr class="mx-20">
                     <td class="text-center border-2 border-indigo-400 p-2 text-indigo-900">1</td>
-                    <td class="text-center border-2 border-indigo-400 p-2 text-indigo-900">(P) Perceivers</td>
-                    <td class="text-center border-2 border-indigo-400 p-2 text-indigo-900">{{ round($P) ?? '0' }}%</td>
+                    <td class="text-center border-2 border-indigo-400 p-2 text-indigo-900">(I) Inroverts</td>
+                    <td class="text-center border-2 border-indigo-400 p-2 text-indigo-900">{{ round($I) ?? '0' }}%</td>
                 </tr>
                 <tr>
                     <td class="text-center border-2 border-indigo-400 p-2 bg-indigo-500 text-white">2</td>
-                    <td class="text-center border-2 border-indigo-400 p-2 bg-indigo-500 text-white">(I) Inroverts</td>
-                    <td class="text-center border-2 border-indigo-400 p-2 bg-indigo-500 text-white">{{ round($I) ?? '0' }}%</td>
+                    <td class="text-center border-2 border-indigo-400 p-2 bg-indigo-500 text-white">(E) Extroverts</td>
+                    <td class="text-center border-2 border-indigo-400 p-2 bg-indigo-500 text-white">{{ round($E) ?? '0' }}%</td>
                 </tr>
                 <tr>
                     <td class="text-center border-2 border-indigo-400 p-2 text-indigo-900">3</td>
+                    <td class="text-center border-2 border-indigo-400 p-2 text-indigo-900">(N) Intuitives</td>
+                    <td class="text-center border-2 border-indigo-400 p-2 text-indigo-900">{{ round($N) ?? '0' }}%</td>
+                </tr>
+                <tr>
+                    <td class="text-center border-2 border-indigo-400 p-2 bg-indigo-500 text-white">4</td>
+                    <td class="text-center border-2 border-indigo-400 p-2 bg-indigo-500 text-white">(S) Sensors</td>
+                    <td class="text-center border-2 border-indigo-400 p-2 bg-indigo-500 text-white">{{ round($S) ?? '0' }}%</td>
+                </tr>
+                <tr>
+                    <td class="text-center border-2 border-indigo-400 p-2 text-indigo-900">5</td>
+                    <td class="text-center border-2 border-indigo-400 p-2 text-indigo-900">(T) Thinkers</td>
+                    <td class="text-center border-2 border-indigo-400 p-2 text-indigo-900">{{ round($T) ?? '0' }}%</td>
+                </tr>
+                <tr>
+                    <td class="text-center border-2 border-indigo-400 p-2 bg-indigo-500 text-white">6</td>
+                    <td class="text-center border-2 border-indigo-400 p-2 bg-indigo-500 text-white">(F) Feelers</td>
+                    <td class="text-center border-2 border-indigo-400 p-2 bg-indigo-500 text-white">{{ round($F) ?? '0' }}%</td>
+                </tr>
+                <tr>
+                    <td class="text-center border-2 border-indigo-400 p-2 text-indigo-900">7</td>
                     <td class="text-center border-2 border-indigo-400 p-2 text-indigo-900">(J) Judgers</td>
                     <td class="text-center border-2 border-indigo-400 p-2 text-indigo-900">{{ round($J) ?? '0' }}%</td>
                 </tr>
                 <tr>
-                    <td class="text-center border-2 border-indigo-400 p-2 bg-indigo-500 text-white">4</td>
-                    <td class="text-center border-2 border-indigo-400 p-2 bg-indigo-500 text-white">(T) Thinkers</td>
-                    <td class="text-center border-2 border-indigo-400 p-2 bg-indigo-500 text-white">{{ round($T) ?? '0' }}%</td>
-                </tr>
-                <tr>
-                    <td class="text-center border-2 border-indigo-400 p-2 text-indigo-900">5</td>
-                    <td class="text-center border-2 border-indigo-400 p-2 text-indigo-900">(E) Extroverts</td>
-                    <td class="text-center border-2 border-indigo-400 p-2 text-indigo-900">{{ round($E) ?? '0' }}%</td>
-                </tr>
-                <tr>
-                    <td class="text-center border-2 border-indigo-400 p-2 bg-indigo-500 text-white">6</td>
-                    <td class="text-center border-2 border-indigo-400 p-2 bg-indigo-500 text-white">(N) Intuitives</td>
-                    <td class="text-center border-2 border-indigo-400 p-2 bg-indigo-500 text-white">{{ round($N) ?? '0' }}%</td>
-                </tr>
-                <tr>
-                    <td class="text-center border-2 border-indigo-400 p-2 text-indigo-900">7</td>
-                    <td class="text-center border-2 border-indigo-400 p-2 text-indigo-900">(S) Sensors</td>
-                    <td class="text-center border-2 border-indigo-400 p-2 text-indigo-900">{{ round($S) ?? '0' }}%</td>
-                </tr>
-                <tr>
                     <td class="text-center border-2 border-indigo-400 p-2 bg-indigo-500 text-white">8</td>
-                    <td class="text-center border-2 border-indigo-400 p-2 bg-indigo-500 text-white">(F) Feelers</td>
-                    <td class="text-center border-2 border-indigo-400 p-2 bg-indigo-500 text-white">{{ round($F) ?? '0' }}%</td>
+                    <td class="text-center border-2 border-indigo-400 p-2 bg-indigo-500 text-white">(P) Perceivers</td>
+                    <td class="text-center border-2 border-indigo-400 p-2 bg-indigo-500 text-white">{{ round($P) ?? '0' }}%</td>
                 </tr>
             </tbody>
         </table>

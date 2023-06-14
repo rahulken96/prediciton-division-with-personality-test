@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use App\Models\User;
+use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
 {
@@ -20,7 +21,7 @@ class UserController extends Controller
     public function index()
     {
         if (!auth()->check()) {
-            return view('users.login');
+            return view('users.login')->with('login', 'Harap Masuk Terlebih Dahulu !');
         }
 
         return redirect(route('home'))->with('info', 'Anda Telah Masuk Akun !');
@@ -56,7 +57,7 @@ class UserController extends Controller
     public function show()
     {
         $data = [
-            'reportCount'   => Report::count(),
+            'reportCount'   => Report::where('nama', Auth::user()->name)->count(),
         ];
 
         return view('users.dashboard', $data);
@@ -69,11 +70,24 @@ class UserController extends Controller
      */
     public function report()
     {
-        $data = [
-            'reportCount'   => Report::where('nama', Auth::user()->name)->get(),
-        ];
+        if (request()->ajax()) {
+            $item = Report::where('nama', Auth::user()->name)->get();
+            return DataTables::of($item)
+                ->addIndexColumn()
+                ->addColumn('created_at', function ($row) {
+                    return date('d F Y', strtotime($row->created_at));
+                })
+                // ->addColumn('action', function ($row) {
 
-        return view('users.report', $data);
+                //     $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
+
+                //     return $btn;
+                // })
+                // ->rawColumns(['action'])
+                ->make(true);
+        }
+
+        return view('users.report');
     }
 
     /**

@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html :class="{ 'theme-dark': dark }" x-data="data()" ang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        @include('layout.head', ['title' => 'Mulai Test'])
-        <link href="{{ asset('css/tailwind.output.css') }}" rel="stylesheet">
-        @livewireStyles
-    </head>
+
+<head>
+    @include('layout.head', ['title' => 'Mulai Test'])
+    <link href="{{ asset('css/tailwind.output.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/cdn.datatables.net_1.13.4_css_jquery.dataTables.min.css') }}" rel="stylesheet">
+</head>
+
 <body>
     <div class="flex h-screen bg-gray-50 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen }">
         @include('layout.sidebar')
@@ -16,13 +18,62 @@
                         Laporan Hasil Penjawab
                     </h2>
                     <div class="w-full overflow-x-auto">
-                        <livewire:reports-table searchable="nama, result" />
+                        <table class="table table-bordered" id="datatables">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>MBTI</th>
+                                    <th>Tanggal Tes</th>
+                                    {{-- <th width="100px">Action</th> --}}
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </main>
         </div>
     </div>
-    @livewireScripts
-</body>
+    @if (session('berhasil'))
+        <script>
+            $(function() {
+                Swal.fire({
+                    icon: 'success',
+                    title: '{{ session('berhasil') }}',
+                    showConfirmButton: false,
+                    timerProgressBar: true,
+                    timer: 2000
+                })
+            });
+        </script>
+    @endif
+    @if (session('gagal'))
+        <script>
+            $(function() {
+                Swal.fire({
+                    icon: 'success',
+                    title: '{{ session('gagal') }}',
+                    showConfirmButton: false,
+                    timerProgressBar: true,
+                    timer: 2000
+                })
+            });
+        </script>
+    @endif
+    <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
+    @php
+    $arrColumn = [
+        'nama' => '',
+        'email' => '',
+        'result' => '',
+        'created_at' => '',
+        // 'action' => 'orderable-false searchable-false',
+    ];
 
+    pagination($arrColumn, url('/pengguna/hasil'));
+    @endphp
+</body>
 </html>

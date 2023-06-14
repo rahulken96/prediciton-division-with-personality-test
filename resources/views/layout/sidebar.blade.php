@@ -102,6 +102,7 @@
                </div>
            </div>
        </aside>
+       <!-- End Mobile sidebar -->
 
        <!-- Modal backdrop. This what you want to place close to the closing body tag -->
        <div x-show="isModalOpen" x-transition:enter="transition ease-out duration-150"

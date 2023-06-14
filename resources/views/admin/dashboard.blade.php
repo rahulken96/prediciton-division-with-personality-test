@@ -18,7 +18,7 @@
             <main class="h-full overflow-y-auto">
                 <div class="container px-6 mx-auto grid">
                     <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
-                        Dashboard
+                        Halo, {{ explode(' ', Auth::user()->name )[0] ?? '' }} !
                     </h2>
                     <!-- Cards -->
                     <div class="grid gap-3 mb-8 md:grid-cols-2 xl:grid-cols-3">
@@ -83,6 +83,32 @@
             </main>
         </div>
     </div>
+    @if (session('berhasil'))
+        <script>
+            $(function() {
+                Swal.fire({
+                    icon: 'success',
+                    title: '{{ session('berhasil') }}',
+                    showConfirmButton: false,
+                    timerProgressBar: true,
+                    timer: 2000
+                })
+            });
+        </script>
+    @endif
+    @if (session('gagal'))
+        <script>
+            $(function() {
+                Swal.fire({
+                    icon: 'success',
+                    title: '{{ session('gagal') }}',
+                    showConfirmButton: false,
+                    timerProgressBar: true,
+                    timer: 2000
+                })
+            });
+        </script>
+    @endif
 </body>
 
 </html>

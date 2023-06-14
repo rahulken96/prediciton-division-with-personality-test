@@ -22,29 +22,29 @@ use App\Models\Report;
 Route::get('/', [QuestionController::class, 'index'])->name('home')->withoutMiddleware('auth');
 
 Route::get('/test', function(){
-    
+
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/login', [UserController::class, 'index'])->name('login')->withoutMiddleware('auth');
-    Route::post('/login', [UserController::class, 'login'])->withoutMiddleware('auth');
+    Route::get('/masuk', [UserController::class, 'index'])->name('login')->withoutMiddleware('auth');
+    Route::post('/masuk', [UserController::class, 'login'])->withoutMiddleware('auth');
 
-    Route::get('/register', [UserController::class, 'create'])->name('register')->withoutMiddleware('auth');
-    Route::post('/register', [UserController::class, 'register'])->withoutMiddleware('auth');
+    Route::get('/daftar', [UserController::class, 'create'])->name('register')->withoutMiddleware('auth');
+    Route::post('/daftar', [UserController::class, 'register'])->withoutMiddleware('auth');
 
-    Route::get('/test', [QuestionController::class, 'create'])->name('test');
+    Route::get('/tes', [QuestionController::class, 'create'])->name('test');
     Route::post('/hasil', [QuestionController::class, 'store'])->name('result');
 
-    Route::prefix('user')->name('users.')->group(function () {
+    Route::prefix('pengguna')->name('users.')->group(function () {
         Route::get('/dashboard', [UserController::class, 'show'])->name('dashboard');
-        Route::get('/report', [UserController::class, 'report'])->name('report');
+        Route::get('/hasil', [UserController::class, 'report'])->name('report');
     });
 
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
-        Route::get('/report', function () { return view('admin.report'); })->name('report');
+        Route::get('/hasil', [AdminController::class, 'report'])->name('report');
 
-        Route::post('/register', [AdminController::class, 'register']);
+        Route::post('/daftar', [AdminController::class, 'register']);
 
         // Route::get('/post', function () { return view('admin.post'); })->name('post');
         // Route::get('/post/add', function () { return view('admin.post'); })->name('post.add');
@@ -53,5 +53,5 @@ Route::middleware('auth')->group(function () {
         // Route::post('/post/add', [PostController::class, 'store']);
     });
 
-    Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+    Route::get('/keluar', [UserController::class, 'logout'])->name('logout');
 });

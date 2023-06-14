@@ -3,7 +3,7 @@
     <head>
         @include('layout.head', ['title' => 'Mulai Test'])
             <link href="{{ asset('css/tailwind.output.css') }}" rel="stylesheet">
-        @livewireStyles
+            <link href="{{ asset('css/cdn.datatables.net_1.13.4_css_jquery.dataTables.min.css') }}" rel="stylesheet">
     </head>
 <body>
     <div class="flex h-screen bg-gray-50 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen }">
@@ -13,16 +13,40 @@
             <main class="h-full overflow-y-auto">
                 <div class="container px-6 mx-auto grid">
                     <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
-                        Laporan Hasil Penjawab
+                        Total Hasil Jawab
                     </h2>
                     <div class="w-full overflow-x-auto">
-                        <livewire:reports-table searchable="nama, result" />
+                        <table class="table table-bordered" id="datatables">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>MBTI</th>
+                                    <th>Tanggal Tes</th>
+                                    {{-- <th width="100px">Action</th> --}}
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </main>
         </div>
     </div>
-    @livewireScripts
+    <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
+    @php
+    $arrColumn = [
+        'nama' => '',
+        'email' => '',
+        'result' => '',
+        'created_at' => '',
+        // 'action' => 'orderable-false searchable-false',
+    ];
+
+    pagination($arrColumn, url('/pengguna/hasil'));
+    @endphp
 </body>
 
 </html>

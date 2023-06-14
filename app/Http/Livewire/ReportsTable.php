@@ -15,10 +15,11 @@ class ReportsTable extends LivewireDatatable
     public function columns()
     {
         return [
-            NumberColumn::name('id')->label('ID'),
+            NumberColumn::name('id')->label('No.'),
             Column::name('nama')->label('Nama'),
-            Column::name('result')->label('Result'),
+            Column::name('result')->label('Hasil'),
             Column::name('created_at')->label('Tanggal Tes'),
         ];
     }
 }
+

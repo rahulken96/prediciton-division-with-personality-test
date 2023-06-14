@@ -22,9 +22,9 @@
                                     $begin = 0;
                                     $no = 1;
                                 @endphp
-                                @for ($i = 0; $i < count($questions) / 6; $i++)
+                                @for ($i = 0; $i < count($questions) / 5; $i++)
                                     <div class="swiper-slide">
-                                        @foreach ($questions->slice($begin, 6) as $question)
+                                        @foreach ($questions->slice($begin, 5) as $question)
                                             <div class="flex justify-center my-4 w-full cursor-pointer">
                                                 <div class="flex-row w-2/4">
                                                     <p class="my-5">
@@ -57,7 +57,7 @@
                                         @endforeach
                                     </div>
                                     @php
-                                        $begin += 6;
+                                        $begin += 5;
                                     @endphp
                                 @endfor
                                 <div class="swiper-slide">

@@ -29,7 +29,7 @@
                         <li class="flex">
                             <a class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800" href="{{ route('logout') }}">
                                 <i class="w-4 mr-3 material-icons">logout</i>
-                                <span>Log out</span>
+                                <span>Keluar</span>
                             </a>
                         </li>
                     </ul>
