@@ -22,7 +22,7 @@ use App\Models\Report;
 Route::get('/', [QuestionController::class, 'index'])->name('home')->withoutMiddleware('auth');
 
 Route::get('/test', function(){
-    // return Report::distinct('nama')->count('nama');
+    
 });
 
 Route::middleware('auth')->group(function () {
