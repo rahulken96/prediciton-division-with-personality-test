@@ -18,6 +18,15 @@
                    <ul>
                        <li class="relative px-6 py-3">
                            <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                               href="{{ route('admin.users') }}">
+                               <i class="material-icons">group</i>
+                               <span class="ml-4">Akun Penjawab</span>
+                           </a>
+                       </li>
+                   </ul>
+                   <ul>
+                       <li class="relative px-6 py-3">
+                           <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                                href="{{ route('admin.report') }}">
                                <i class="material-icons">content_paste</i>
                                <span class="ml-4">Hasil</span>
@@ -120,7 +129,7 @@
                role="dialog" id="modal">
                <!-- Modal body -->
                @csrf
-               <form action="{{ route('admin.dashboard') }}" method="post">
+               <form action="{{ route('admin.register') }}" method="post">
                    @csrf
                    <div class="mt-4 mb-6">
                        <!-- Modal title -->
@@ -131,19 +140,45 @@
                            <span class="text-gray-700 dark:text-gray-400">Nama</span>
                            <input
                                class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                               type="text" name="name" class="form-control" placeholder="Nama Lengkap" />
+                               type="text" name="nama" class="form-control" placeholder="Nama Lengkap" required/>
+                            @error('nama')
+                                <span class="invalid-feedback text-red-500" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                       </label>
+                       <label class="block mt-4 text-sm">
+                           <span class="text-gray-700 dark:text-gray-400">No. HP</span>
+                           <input
+                               class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                               type="text" name="noHP" class="form-control" placeholder="No. HP" required/>
+                            @error('noHP')
+                                <span class="invalid-feedback text-red-500" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                        </label>
                        <label class="block mt-4 text-sm">
                            <span class="text-gray-700 dark:text-gray-400">Email</span>
                            <input
                                class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                               type="text" name="email" class="form-control" placeholder="Email" />
+                               type="text" name="email" class="form-control" placeholder="Email" required/>
+                            @error('email')
+                                <span class="invalid-feedback text-red-500" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                        </label>
                        <label class="block mt-4 text-sm">
                            <span class="text-gray-700 dark:text-gray-400">Password</span>
                            <input
                                class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                               type="password" name="password" class="form-control" placeholder="Password" />
+                               type="password" name="password" class="form-control" placeholder="Password" required/>
+                            @error('password')
+                                <span class="invalid-feedback text-red-500" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                        </label>
                    </div>
                    <footer

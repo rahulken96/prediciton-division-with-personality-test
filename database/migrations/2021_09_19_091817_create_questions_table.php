@@ -16,10 +16,7 @@ class CreateQuestionsTable extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
             $table->string('pertanyaan');
-            $table->string('jawaban_satu');
-            $table->string('jawaban_dua');
-            $table->string('type_satu')->length(2);
-            $table->string('type_dua')->length(2);
+            $table->string('type')->length(1);
         });
     }
 

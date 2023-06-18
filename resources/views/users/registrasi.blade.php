@@ -18,7 +18,8 @@
         style="background-image: url({{ asset('images/bg-15.png') }});" aria-label="Illustrations by IRA Design">
         <div class="flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
             <br><br>
-            <form action="#" method="post" class="login-form">
+            <form action="/daftar" method="post" class="login-form">
+                @csrf
                 <div class="flex flex-col overflow-y-auto md:flex-row">
                     <div class="flex items-center justify-center p-6 sm:p-6 md:w-1/2">
                         <div class="w-full">
@@ -27,12 +28,22 @@
                             <label class="block mt-4 text-sm">
                                 <span class="text-gray-700 dark:text-gray-400">Nama</span>
                                 <input type="text" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-green-400 focus:outline-none focus:shadow-outline-green dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                                    type="text" name="nama" class="form-control" placeholder="Nama" autocomplete="off">
+                                    type="text" name="nama" class="form-control" placeholder="Nama" autocomplete="off" required>
+                                @error('nama')
+                                    <span class="invalid-feedback text-red-500" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </label>
                             <label class="block mt-4 text-sm">
                                 <span class="text-gray-700 dark:text-gray-400">No HP</span>
                                 <input type="text" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-green-400 focus:outline-none focus:shadow-outline-green dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                                    type="text" name="noHP" class="form-control" placeholder="No. HP" autocomplete="off">
+                                    type="text" name="noHP" class="form-control" placeholder="No. HP" autocomplete="off" required>
+                                @error('noHP')
+                                    <span class="invalid-feedback text-red-500" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </label>
                         </div>
                     </div>
@@ -41,12 +52,22 @@
                             <label class="block mt-12 text-sm">
                                 <span class="text-gray-700 dark:text-gray-400">Email</span>
                                 <input type="text" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-green-400 focus:outline-none focus:shadow-outline-green dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                                    type="text" name="email" class="form-control" placeholder="Email" autocomplete="off"/>
+                                    type="text" name="email" class="form-control" placeholder="Email" autocomplete="off" required/>
+                                @error('email')
+                                    <span class="invalid-feedback text-red-500" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </label>
                             <label class="block mt-4 text-sm">
                                 <span class="text-gray-700 dark:text-gray-400">Password</span>
                                 <input type="password" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-green-400 focus:outline-none focus:shadow-outline-green dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                                    type="text" name="password" class="form-control" placeholder="Password" />
+                                    type="text" name="password" class="form-control" placeholder="Password" required/>
+                                @error('password')
+                                    <span class="invalid-feedback text-red-500" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </label>
                         </div>
                     </div>

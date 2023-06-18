@@ -6,6 +6,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\UserController;
 use App\Models\Report;
+use App\Models\Result;
 
 // use Illuminate\Support\Facades\Http;
 
@@ -21,9 +22,9 @@ use App\Models\Report;
 */
 Route::get('/', [QuestionController::class, 'index'])->name('home')->withoutMiddleware('auth');
 
-Route::get('/test', function(){
+// Route::get('/test', function(){
 
-});
+// });
 
 Route::middleware('auth')->group(function () {
     Route::get('/masuk', [UserController::class, 'index'])->name('login')->withoutMiddleware('auth');
@@ -33,7 +34,20 @@ Route::middleware('auth')->group(function () {
     Route::post('/daftar', [UserController::class, 'register'])->withoutMiddleware('auth');
 
     Route::get('/tes', [QuestionController::class, 'create'])->name('test');
+
     Route::post('/hasil', [QuestionController::class, 'store'])->name('result');
+
+    Route::get('/print/{id}', function($id){
+        $id = dec($id);
+        $test = Report::find($id);
+
+        $data = [
+            'tes'   => $test,
+            'ket'   => Result::where('mbti', $test['result'])->first(),
+        ];
+
+        return view('users.print', $data);
+    });
 
     Route::prefix('pengguna')->name('users.')->group(function () {
         Route::get('/dashboard', [UserController::class, 'show'])->name('dashboard');
@@ -43,14 +57,9 @@ Route::middleware('auth')->group(function () {
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
         Route::get('/hasil', [AdminController::class, 'report'])->name('report');
+        Route::get('/akun-pengguna', [AdminController::class, 'users'])->name('users');
 
-        Route::post('/daftar', [AdminController::class, 'register']);
-
-        // Route::get('/post', function () { return view('admin.post'); })->name('post');
-        // Route::get('/post/add', function () { return view('admin.post'); })->name('post.add');
-        // Route::get('/post/edit/{id}', [PostController::class, 'edit'])->name('post.edit');
-        // Route::post('/post/edit/{id}', [PostController::class, 'update']);
-        // Route::post('/post/add', [PostController::class, 'store']);
+        Route::post('/daftar', [AdminController::class, 'register'])->name('register');
     });
 
     Route::get('/keluar', [UserController::class, 'logout'])->name('logout');

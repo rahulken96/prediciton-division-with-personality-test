@@ -109,11 +109,13 @@ class QuestionController extends Controller
 
         /* Proses Inisiasi Data */
         $reports = new Report();
-        $nama = auth()->user()->name;
+        $id = auth()->user()->id;
+        $nama = auth()->user()->nama;
         $email = auth()->user()->email;
 
         $reports->nama  = (!empty($nama) || $nama != null ? $nama : '?');
         $reports->email = (!empty($email) || $email != null ? $email : '?');
+        $reports->userID = (!empty($id) || $id != null ? $id : 0);
         $reports->P     = $P;
         $reports->I     = $I;
         $reports->J     = $J;

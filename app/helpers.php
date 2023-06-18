@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Question;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Str;
 
 function pagination($arrColumn, $link)
@@ -50,6 +51,16 @@ function pagination($arrColumn, $link)
         });
     </script>
 <?php
+}
+
+function enc($val)
+{
+    return Crypt::encrypt($val);
+}
+
+function dec($val)
+{
+    return Crypt::decrypt($val);
 }
 
 function totalSoal($kepribadian)

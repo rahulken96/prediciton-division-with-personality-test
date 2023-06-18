@@ -2,7 +2,7 @@
 <html :class="{ 'theme-dark': dark }" x-data="data()" ang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    @include('layout.head', ['title' => 'Mulai Test'])
+    @include('layout.head', ['title' => 'Admin'])
     <link href="{{ asset('css/tailwind.output.css') }}" rel="stylesheet">
     <link href="{{ asset('css/cdn.datatables.net_1.13.4_css_jquery.dataTables.min.css') }}" rel="stylesheet">
 </head>
@@ -21,12 +21,12 @@
                         <table class="table table-bordered" id="datatables">
                             <thead>
                                 <tr>
-                                    <th>No</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>MBTI</th>
-                                    <th>Tanggal Tes</th>
-                                    {{-- <th width="100px">Action</th> --}}
+                                    <th width="5%">No</th>
+                                    <th width="20%">Nama</th>
+                                    <th width="20%">Email</th>
+                                    <th width="15%">Tipe MBTI</th>
+                                    <th width="25%">Tanggal Tes</th>
+                                    <th width="15%">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -37,32 +37,6 @@
             </main>
         </div>
     </div>
-    @if (session('berhasil'))
-        <script>
-            $(function() {
-                Swal.fire({
-                    icon: 'success',
-                    title: '{{ session('berhasil') }}',
-                    showConfirmButton: false,
-                    timerProgressBar: true,
-                    timer: 2000
-                })
-            });
-        </script>
-    @endif
-    @if (session('gagal'))
-        <script>
-            $(function() {
-                Swal.fire({
-                    icon: 'success',
-                    title: '{{ session('gagal') }}',
-                    showConfirmButton: false,
-                    timerProgressBar: true,
-                    timer: 2000
-                })
-            });
-        </script>
-    @endif
     <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
     @php
     $arrColumn = [
@@ -70,10 +44,10 @@
         'email' => '',
         'result' => '',
         'created_at' => '',
-        // 'action' => 'orderable-false searchable-false',
+        'action' => 'orderable-false searchable-false',
     ];
 
-    pagination($arrColumn, url('/pengguna/hasil'));
+    pagination($arrColumn, url('/admin/hasil'));
     @endphp
 </body>
 </html>

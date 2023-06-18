@@ -57,7 +57,7 @@ class UserController extends Controller
     public function show()
     {
         $data = [
-            'reportCount'   => Report::where('nama', Auth::user()->name)->count(),
+            'reportCount'   => Report::where('userID', Auth::user()->id)->count(),
         ];
 
         return view('users.dashboard', $data);
@@ -71,19 +71,17 @@ class UserController extends Controller
     public function report()
     {
         if (request()->ajax()) {
-            $item = Report::where('nama', Auth::user()->name)->get();
+            $item = Report::where('userID', Auth::user()->id)->orderBy('created_at','desc')->get();
             return DataTables::of($item)
                 ->addIndexColumn()
                 ->addColumn('created_at', function ($row) {
-                    return date('d F Y', strtotime($row->created_at));
+                    return date('d F Y H:i', strtotime($row->created_at));
                 })
-                // ->addColumn('action', function ($row) {
-
-                //     $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
-
-                //     return $btn;
-                // })
-                // ->rawColumns(['action'])
+                ->addColumn('action', function ($row) {
+                    $btn = '<a href="' . url("/print/" . enc($row->id)) . '" class="px-1 py-1 text-sm font-semibold text-green-400 border-2 border-green-400 rounded-lg active:bg-green-600 hover:bg-green-700 hover:text-white transform hover:scale-110 hover:border-green-50 transition duration-500">Lihat Hasil</a>&nbsp';
+                    return $btn;
+                })
+                ->rawColumns(['action'])
                 ->make(true);
         }
 
@@ -152,10 +150,10 @@ class UserController extends Controller
         // Cek login sekalian session field di users nanti bisa dipanggil via Auth
         if (Auth::attempt($data)) {
             if (Auth::user()->isAdmin == 1) {
-                return redirect()->route('admin.dashboard');
+                return redirect(route('admin.dashboard'));
             };
 
-            return redirect()->route('home');
+            return redirect(route('test'));
         }
 
         //Login gagal
@@ -164,8 +162,23 @@ class UserController extends Controller
 
     public function register(Request $request)
     {
+        $request->validate([
+            'nama'      => 'required|string',
+            'noHP'      => 'required|numeric',
+            'email'     => 'required|email',
+            'password'  => 'required',
+        ],[
+            'nama.required'     => 'Nama Wajib Diisi !',
+            'nama.string'       => 'Nama Hanya Berisi Huruf',
+            'noHP.required'     => 'No. HP Wajib Diisi !',
+            'noHP.numeric'      => 'No. HP Hanya Berisi Angka',
+            'email.required'    => 'Email Wajib Diisi !',
+            'email.email'       => 'Harap Mengisi Email Dengan Benar !',
+            'password.required' => 'Password Wajib Diisi !',
+        ]);
+
         $user = new User();
-        $user->name     = ucwords(strtolower($request->nama));
+        $user->nama     = ucwords(strtolower($request->nama));
         $user->email    = strtolower($request->email);
         $user->noHP     = $request->noHP;
         $user->password = Hash::make($request->password);
@@ -184,6 +197,6 @@ class UserController extends Controller
     {
         // menghapus session yang aktif
         Auth::logout();
-        return redirect(route('home'))->with('berhasil', 'Anda Telah Keluar Akun !');
+        return redirect(route('home'))->with('info', 'Anda Telah Keluar dari Akun !');
     }
 }
