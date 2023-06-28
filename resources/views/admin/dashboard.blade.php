@@ -76,6 +76,7 @@
                                 <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
                                     {{$questionCount}}
                                 </p>
+
                             </div>
                         </div>
                     </div>
@@ -83,32 +84,7 @@
             </main>
         </div>
     </div>
-    @if (session('berhasil'))
-        <script>
-            $(function() {
-                Swal.fire({
-                    icon: 'success',
-                    title: '{{ session('berhasil') }}',
-                    showConfirmButton: false,
-                    timerProgressBar: true,
-                    timer: 2000
-                })
-            });
-        </script>
-    @endif
-    @if (session('gagal'))
-        <script>
-            $(function() {
-                Swal.fire({
-                    icon: 'success',
-                    title: '{{ session('gagal') }}',
-                    showConfirmButton: false,
-                    timerProgressBar: true,
-                    timer: 2000
-                })
-            });
-        </script>
-    @endif
+    @include('components.alert-berhasil-gagal')
 </body>
 
 </html>

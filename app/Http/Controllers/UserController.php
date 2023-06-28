@@ -34,7 +34,11 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.registrasi');
+        if (!auth()->check()) {
+            return view('users.registrasi');
+        }
+
+        return redirect(route('home'))->with('info', 'Anda Telah Masuk Akun !');
     }
 
     /**
@@ -56,20 +60,10 @@ class UserController extends Controller
      */
     public function show()
     {
-        $data = [
-            'reportCount'   => Report::where('userID', Auth::user()->id)->count(),
-        ];
+        if (auth()->user()->isAdmin != 0) {
+            return back()->with('gagal', 'Harap Mengganti Akun Terlebih Dahulu !');
+        }
 
-        return view('users.dashboard', $data);
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function report()
-    {
         if (request()->ajax()) {
             $item = Report::where('userID', Auth::user()->id)->orderBy('created_at','desc')->get();
             return DataTables::of($item)
@@ -85,7 +79,11 @@ class UserController extends Controller
                 ->make(true);
         }
 
-        return view('users.report');
+        $data = [
+            'reportCount'   => Report::where('userID', Auth::user()->id)->count(),
+        ];
+
+        return view('users.dashboard', $data);
     }
 
     /**
@@ -94,9 +92,17 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit()
     {
-        //
+        if (auth()->user()->isAdmin != 0) {
+            return back()->with('gagal', 'Harap Mengganti Akun Terlebih Dahulu !');
+        }
+
+        $data = [
+            'data'  => User::find(Auth::user()->id),
+        ];
+
+        return view('users.profile', $data);
     }
 
     /**
@@ -106,9 +112,45 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        //Validasi inputan dari $request
+        $request->validate([
+            'nama'      => 'required|string',
+            'noHP'      => 'required|numeric',
+            'email'     => 'required|email',
+        ],[
+            'nama.required'     => 'Nama Wajib Diisi !',
+            'nama.string'       => 'Nama Hanya Berisi Huruf',
+            'noHP.required'     => 'No. HP Wajib Diisi !',
+            'noHP.numeric'      => 'No. HP Hanya Berisi Angka',
+            'email.required'    => 'Email Wajib Diisi !',
+            'email.email'       => 'Harap Mengisi Email Dengan Benar !',
+        ]);
+
+        $user = User::where('id', Auth::user()->id);
+        $report = Report::where('userID', Auth::user()->id);
+
+        //Update user
+        if(isset($request->password)){
+            $password = Hash::make($request->password);
+            $user->update(['password' => $password]);
+        }
+        $user->update([
+            'nama'        => $request->nama,
+            'email'       => $request->email,
+            'noHP'        => $request->noHP,
+            'updated_at'  => \Carbon\Carbon::now(),
+        ]);
+
+        //Update user di reports
+        $report->update([
+            'nama'        => $request->nama,
+            'email'       => $request->email,
+            'updated_at'  => \Carbon\Carbon::now(),
+        ]);
+
+        return redirect(route('users.profile'))->with('berhasil', 'Data berhasil diubah !');
     }
 
     /**
@@ -153,7 +195,7 @@ class UserController extends Controller
                 return redirect(route('admin.dashboard'));
             };
 
-            return redirect(route('test'));
+            return redirect(route('test'))->with('info', 'Selamat Mengerjakan !!');
         }
 
         //Login gagal
@@ -197,6 +239,6 @@ class UserController extends Controller
     {
         // menghapus session yang aktif
         Auth::logout();
-        return redirect(route('home'))->with('info', 'Anda Telah Keluar dari Akun !');
+        return redirect(route('login'))->with('berhasil', 'Anda Berhasil Keluar !');
     }
 }

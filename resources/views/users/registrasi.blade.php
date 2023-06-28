@@ -30,7 +30,7 @@
                                 <input type="text" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-green-400 focus:outline-none focus:shadow-outline-green dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                                     type="text" name="nama" class="form-control" placeholder="Nama" autocomplete="off" required>
                                 @error('nama')
-                                    <span class="invalid-feedback text-red-500" role="alert">
+                                    <span class="mt-4 text-red-600 text-sm" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
@@ -40,7 +40,7 @@
                                 <input type="text" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-green-400 focus:outline-none focus:shadow-outline-green dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                                     type="text" name="noHP" class="form-control" placeholder="No. HP" autocomplete="off" required>
                                 @error('noHP')
-                                    <span class="invalid-feedback text-red-500" role="alert">
+                                    <span class="mt-4 text-red-600 text-sm" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
@@ -54,7 +54,7 @@
                                 <input type="text" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-green-400 focus:outline-none focus:shadow-outline-green dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                                     type="text" name="email" class="form-control" placeholder="Email" autocomplete="off" required/>
                                 @error('email')
-                                    <span class="invalid-feedback text-red-500" role="alert">
+                                    <span class="mt-4 text-red-600 text-sm" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
@@ -64,7 +64,7 @@
                                 <input type="password" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-green-400 focus:outline-none focus:shadow-outline-green dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                                     type="text" name="password" class="form-control" placeholder="Password" required/>
                                 @error('password')
-                                    <span class="invalid-feedback text-red-500" role="alert">
+                                    <span class="mt-4 text-red-600 text-sm" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror

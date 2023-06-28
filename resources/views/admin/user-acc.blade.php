@@ -47,5 +47,6 @@
 
     pagination($arrColumn, url('/admin/akun-pengguna'));
     @endphp
+    @include('components.alert-berhasil-gagal')
 </body>
 </html>

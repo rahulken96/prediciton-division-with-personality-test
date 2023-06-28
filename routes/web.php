@@ -51,7 +51,8 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('pengguna')->name('users.')->group(function () {
         Route::get('/dashboard', [UserController::class, 'show'])->name('dashboard');
-        Route::get('/hasil', [UserController::class, 'report'])->name('report');
+        Route::get('/profil', [UserController::class, 'edit'])->name('profile');
+        Route::post('/profil', [UserController::class, 'update'])->name('profile_update');
     });
 
     Route::prefix('admin')->name('admin.')->group(function () {

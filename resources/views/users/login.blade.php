@@ -44,7 +44,7 @@
 
                             <a href="{{ route('home') }}" type="submit"
                                 class="w-36 px-4 py-1 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-blue-500 border border-transparent rounded-lg active:bg-blue-500 hover:bg-blue-400 focus:outline-none focus:shadow-outline-blue">
-                                Kembali
+                                Halaman Utama
                             </a>
                             <button type="submit"
                                 class="w-44 px-4 py-1 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-green-500 border border-transparent rounded-lg active:bg-green-500 hover:bg-green-400 focus:outline-none focus:shadow-outline-green">

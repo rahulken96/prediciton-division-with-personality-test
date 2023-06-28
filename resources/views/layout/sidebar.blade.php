@@ -54,9 +54,9 @@
                    <ul>
                        <li class="relative px-6 py-3">
                            <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                               href="{{ route('users.report') }}">
-                               <i class="material-icons">content_paste</i>
-                               <span class="ml-4">Hasil</span>
+                               href="{{ route('users.profile') }}">
+                               <i class="material-icons">manage_accounts</i>
+                               <span class="ml-4">Ubah Profil</span>
                            </a>
                        </li>
                    </ul>
@@ -82,33 +82,63 @@
                <a class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200" href="{{ route('home') }}">
                    <span class="ml-2" style="color: #00BFA6">MBTI</span>
                </a>
-               <span class="text-lg font-bold text-gray-800 dark:text-gray-200">Admin</span>
-               <ul class="mt-6">
-                   <li class="relative px-6 py-3">
-                       <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                           href="/admin/dashboard">
-                           <i class="material-icons">home</i>
-                           <span class="ml-4">Dashboard</span>
-                       </a>
-                   </li>
-               </ul>
-               <ul>
-                   <li class="relative px-6 py-3">
-                       <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                           href="/admin/report">
-                           <i class="material-icons">content_paste</i>
-                           <span class="ml-4">Hasil</span>
-                       </a>
-                   </li>
-
-               </ul>
-               <div class="px-6 my-6">
-                   <button
-                       class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue">
-                       Tambah Admin
-                       <span class="ml-2" aria-hidden="true">+</span>
-                   </button>
-               </div>
+               @if (Auth::user()->isAdmin == 1)
+                   <span class="text-lg font-bold text-gray-800 dark:text-gray-200">Admin</span>
+                   <ul class="mt-6">
+                       <li class="relative px-6 py-3">
+                           <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                               href="{{ route('admin.dashboard') }}">
+                               <i class="material-icons">home</i>
+                               <span class="ml-4">Dashboard</span>
+                           </a>
+                       </li>
+                   </ul>
+                   <ul>
+                       <li class="relative px-6 py-3">
+                           <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                               href="{{ route('admin.users') }}">
+                               <i class="material-icons">group</i>
+                               <span class="ml-4">Akun Penjawab</span>
+                           </a>
+                       </li>
+                   </ul>
+                   <ul>
+                       <li class="relative px-6 py-3">
+                           <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                               href="{{ route('admin.report') }}">
+                               <i class="material-icons">content_paste</i>
+                               <span class="ml-4">Hasil</span>
+                           </a>
+                       </li>
+                   </ul>
+                   <div class="px-6 my-6">
+                       <button @click="openModal"
+                           class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-green-600 border border-transparent rounded-lg active:bg-green-600 hover:bg-green-700 focus:outline-none focus:shadow-outline-green">
+                           Tambah Admin
+                           <span class="ml-2" aria-hidden="true">+</span>
+                       </button>
+                   </div>
+               @else
+                   <span class="text-lg font-bold text-gray-800 dark:text-gray-200">Dashboard</span>
+                   <ul class="mt-6">
+                       <li class="relative px-6 py-3">
+                           <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                               href="{{ route('users.dashboard') }}">
+                               <i class="material-icons">home</i>
+                               <span class="ml-4">Dashboard</span>
+                           </a>
+                       </li>
+                   </ul>
+                   <ul>
+                       <li class="relative px-6 py-3">
+                           <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                               href="{{ route('users.profile') }}">
+                               <i class="material-icons">manage_accounts</i>
+                               <span class="ml-4">Ubah Profil</span>
+                           </a>
+                       </li>
+                   </ul>
+               @endif
            </div>
        </aside>
        <!-- End Mobile sidebar -->
@@ -140,45 +170,47 @@
                            <span class="text-gray-700 dark:text-gray-400">Nama</span>
                            <input
                                class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                               type="text" name="nama" class="form-control" placeholder="Nama Lengkap" required/>
-                            @error('nama')
-                                <span class="invalid-feedback text-red-500" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                               type="text" name="nama" class="form-control" placeholder="Nama Lengkap"
+                               required />
+                           @error('nama')
+                               <span class="invalid-feedback text-red-500" role="alert">
+                                   <strong>{{ $message }}</strong>
+                               </span>
+                           @enderror
                        </label>
                        <label class="block mt-4 text-sm">
                            <span class="text-gray-700 dark:text-gray-400">No. HP</span>
                            <input
                                class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                               type="text" name="noHP" class="form-control" placeholder="No. HP" required/>
-                            @error('noHP')
-                                <span class="invalid-feedback text-red-500" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                               type="text" name="noHP" class="form-control" placeholder="No. HP" required />
+                           @error('noHP')
+                               <span class="invalid-feedback text-red-500" role="alert">
+                                   <strong>{{ $message }}</strong>
+                               </span>
+                           @enderror
                        </label>
                        <label class="block mt-4 text-sm">
                            <span class="text-gray-700 dark:text-gray-400">Email</span>
                            <input
                                class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                               type="text" name="email" class="form-control" placeholder="Email" required/>
-                            @error('email')
-                                <span class="invalid-feedback text-red-500" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                               type="text" name="email" class="form-control" placeholder="Email" required />
+                           @error('email')
+                               <span class="invalid-feedback text-red-500" role="alert">
+                                   <strong>{{ $message }}</strong>
+                               </span>
+                           @enderror
                        </label>
                        <label class="block mt-4 text-sm">
                            <span class="text-gray-700 dark:text-gray-400">Password</span>
                            <input
                                class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                               type="password" name="password" class="form-control" placeholder="Password" required/>
-                            @error('password')
-                                <span class="invalid-feedback text-red-500" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                               type="password" name="password" class="form-control" placeholder="Password"
+                               required />
+                           @error('password')
+                               <span class="invalid-feedback text-red-500" role="alert">
+                                   <strong>{{ $message }}</strong>
+                               </span>
+                           @enderror
                        </label>
                    </div>
                    <footer

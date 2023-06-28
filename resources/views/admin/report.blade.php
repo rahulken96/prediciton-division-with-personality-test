@@ -49,5 +49,6 @@
 
     pagination($arrColumn, url('/admin/hasil'));
     @endphp
+    @include('components.alert-berhasil-gagal')
 </body>
 </html>

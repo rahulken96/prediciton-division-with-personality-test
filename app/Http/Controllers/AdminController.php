@@ -12,9 +12,19 @@ use Yajra\DataTables\Facades\DataTables;
 
 class AdminController extends Controller
 {
+    protected $isAdmin;
+
     public function __construct()
     {
-        $this->middleware('auth')->except('logout');
+        $this->middleware(function ($request, $next) {
+            $this->isAdmin = auth()->user()->isAdmin;
+
+            if ($this->isAdmin != 1) {
+                return back()->with('gagal', 'Harap Mengganti Akun Terlebih Dahulu !');
+            }
+
+            return $next($request);
+        });
     }
 
     /**
@@ -24,10 +34,6 @@ class AdminController extends Controller
      */
     public function index()
     {
-        if (auth()->user()->isAdmin != 1) {
-            return redirect()->back()->with('gagal', 'Harap Mengganti Akun Terlebih Dahulu !');
-        }
-
         $data = [
             'adminCount'    => User::where('isAdmin', 1)->count(),
             'userCount'     => User::where('isAdmin', 0)->count(),
