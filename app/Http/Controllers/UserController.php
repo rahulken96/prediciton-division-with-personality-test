@@ -220,7 +220,7 @@ class UserController extends Controller
             'email.email'       => 'Harap Mengisi Email Dengan Benar !',
             'password.required' => 'Password Wajib Diisi !',
         ]);
-        
+
         $user = new User();
         $user->nama     = ucwords(strtolower($request->nama));
         $user->email    = strtolower($request->email);
