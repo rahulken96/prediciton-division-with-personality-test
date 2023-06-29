@@ -117,13 +117,14 @@ class UserController extends Controller
         //Validasi inputan dari $request
         $request->validate([
             'nama'      => 'required|string',
-            'noHP'      => 'required|numeric',
-            'email'     => 'required|email',
-        ],[
+            'noHP'      => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:12',
+            'email'     => 'required|email:rfc,dns',
+        ], [
             'nama.required'     => 'Nama Wajib Diisi !',
             'nama.string'       => 'Nama Hanya Berisi Huruf',
             'noHP.required'     => 'No. HP Wajib Diisi !',
-            'noHP.numeric'      => 'No. HP Hanya Berisi Angka',
+            'noHP.regex'        => 'Harap Mengisi Format No. HP Dengan Benar !',
+            'noHP.min'          => 'No. HP Minimal 12 Digit Nomor !',
             'email.required'    => 'Email Wajib Diisi !',
             'email.email'       => 'Harap Mengisi Email Dengan Benar !',
         ]);
@@ -206,19 +207,20 @@ class UserController extends Controller
     {
         $request->validate([
             'nama'      => 'required|string',
-            'noHP'      => 'required|numeric',
-            'email'     => 'required|email',
+            'noHP'      => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:12',
+            'email'     => 'required|email:rfc,dns',
             'password'  => 'required',
         ],[
             'nama.required'     => 'Nama Wajib Diisi !',
             'nama.string'       => 'Nama Hanya Berisi Huruf',
             'noHP.required'     => 'No. HP Wajib Diisi !',
-            'noHP.numeric'      => 'No. HP Hanya Berisi Angka',
+            'noHP.regex'        => 'Harap Mengisi Format No. HP Dengan Benar !',
+            'noHP.min'          => 'No. HP Minimal 12 Digit Nomor !',
             'email.required'    => 'Email Wajib Diisi !',
             'email.email'       => 'Harap Mengisi Email Dengan Benar !',
             'password.required' => 'Password Wajib Diisi !',
         ]);
-
+        
         $user = new User();
         $user->nama     = ucwords(strtolower($request->nama));
         $user->email    = strtolower($request->email);

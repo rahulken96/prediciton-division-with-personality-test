@@ -51,8 +51,9 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('pengguna')->name('users.')->group(function () {
         Route::get('/dashboard', [UserController::class, 'show'])->name('dashboard');
+
         Route::get('/profil', [UserController::class, 'edit'])->name('profile');
-        Route::post('/profil', [UserController::class, 'update'])->name('profile_update');
+        Route::put('/profil', [UserController::class, 'update'])->name('profile_update');
     });
 
     Route::prefix('admin')->name('admin.')->group(function () {
@@ -60,7 +61,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/hasil', [AdminController::class, 'report'])->name('report');
         Route::get('/akun-pengguna', [AdminController::class, 'users'])->name('users');
 
-        Route::post('/daftar', [AdminController::class, 'register'])->name('register');
+        Route::get('/profil', [AdminController::class, 'edit'])->name('profile');
+        Route::put('/profil', [AdminController::class, 'update'])->name('profile_update');
+
+        // Route::post('/daftar', [AdminController::class, 'register'])->name('register');
     });
 
     Route::get('/keluar', [UserController::class, 'logout'])->name('logout');

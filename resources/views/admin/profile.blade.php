@@ -2,7 +2,7 @@
 <html :class="{ 'theme-dark': dark }" x-data="data()" ang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    @include('layout.head', ['title' => 'Profil Pengguna'])
+    @include('layout.head', ['title' => 'Profil Admin'])
     <link href="{{ asset('css/tailwind.output.css') }}" rel="stylesheet">
 </head>
 
@@ -16,7 +16,7 @@
                     <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
                         Profil Pribadi
                     </h2>
-                    <form action="{{ route('users.profile_update') }}" method="post" class="login-form">
+                    <form action="{{ route('admin.profile_update') }}" method="post" class="login-form">
                         @csrf
                         @method('PUT')
                         <div class="p-auto">

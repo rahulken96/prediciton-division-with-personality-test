@@ -2,7 +2,7 @@
 <html :class="{ 'theme-dark': dark }" x-data="data()" ang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    @include('layout.head', ['title' => 'Admin'])
+    @include('layout.head', ['title' => 'Data Akun'])
     <link href="{{ asset('css/tailwind.output.css') }}" rel="stylesheet">
     <link href="{{ asset('css/cdn.datatables.net_1.13.4_css_jquery.dataTables.min.css') }}" rel="stylesheet">
 </head>

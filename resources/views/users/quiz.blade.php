@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    @include('layout.head', ['title' => 'Mulai Test'])
+    @include('layout.head', ['title' => 'Mulai Tes'])
     <!--  Swiper's CSS -->
     <link rel="stylesheet" href="{{ asset('css/swiper-bundle.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/custom-radio.css') }}" />
@@ -22,10 +22,10 @@
                                     $begin = 0;
                                     $no = 1;
                                 @endphp
-                                @for ($i = 0; $i < count($questions) / 5; $i++)
                                 <a href="{{ route('home') }}" class="transform transition duration-500 hover:scale-105 hover:-translate-y-1 bg-blue-600 hover:scale-11 hover:bg-blue-800 text-white py-3 px-6 rounded-md">
                                     ↩️ Kembali
                                 </a>
+                                @for ($i = 0; $i < count($questions) / 5; $i++)
                                     <div class="swiper-slide">
                                         @foreach ($questions->slice($begin, 5) as $question)
                                             <div class="flex justify-center my-4 w-full cursor-pointer">

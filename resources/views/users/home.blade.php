@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    @include('layout.head', ['title' => 'Home'])
+    @include('layout.head', ['title' => 'Halaman Utama'])
     <style>
         html {
             scroll-behavior: smooth;

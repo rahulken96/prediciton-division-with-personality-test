@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <head>
-        @include('layout.head', ['title' => 'Hasil Test'])
+        @include('layout.head', ['title' => 'Hasil Tes'])
         <style>
             @media print {
                 @page {
