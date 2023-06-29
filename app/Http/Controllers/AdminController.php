@@ -143,10 +143,78 @@ class AdminController extends Controller
                 ->addColumn('created_at', function ($row) {
                     return date('d F Y H:i', strtotime($row->created_at));
                 })
+                ->addColumn('action', function ($row) {
+                    $btn = '<a href="' . url("/admin/akun-pengguna/" . enc($row->id) . "/ubah") . '" title="Ubah" class="px-1 pt-3 text-sm font-semibold text-blue-500 border-1 border-blue-400 rounded-lg active:bg-blue-600 hover:bg-blue-500 hover:text-white transform hover:scale-110 hover:border-blue-50 transition duration-500"><i class="material-icons text-center">edit</i></a>&nbsp';
+                    $btn .= '<a href="#" onclick=hapus(' . $row->id . ') title="Hapus" class="px-1 pt-3 text-sm font-semibold text-red-600 border-1 border-red-400 rounded-lg active:bg-red-600 hover:bg-red-500 hover:text-white transform hover:scale-110 hover:border-red-50 transition duration-500"><i class="material-icons text-center">delete</i></a>&nbsp';
+                    return $btn;
+                })
+                ->rawColumns(['action'])
                 ->make(true);
         }
 
         return view('admin.user-acc');
+    }
+
+    public function editUsers($id)
+    {
+        $id = dec($id);
+        $data = [
+            'data'  => User::find($id),
+        ];
+
+        return view('admin.edit-user-acc', $data);
+    }
+
+    public function updateUsers(Request $request, $id)
+    {
+        //Validasi inputan dari $request
+        $request->validate([
+            'nama'      => 'required|string',
+            'noHP'      => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:12',
+            'email'     => 'required|email:rfc,dns',
+        ], [
+            'nama.required'     => 'Nama Wajib Diisi !',
+            'nama.string'       => 'Nama Hanya Berisi Huruf',
+            'noHP.required'     => 'No. HP Wajib Diisi !',
+            'noHP.regex'        => 'Harap Mengisi Format No. HP Dengan Benar !',
+            'noHP.min'          => 'No. HP Minimal 12 Digit Nomor !',
+            'email.required'    => 'Email Wajib Diisi !',
+            'email.email'       => 'Harap Mengisi Email Dengan Benar !',
+        ]);
+
+        $id = dec($id);
+        $user = User::where('id', $id);
+        $report = Report::where('userID', $id);
+
+        //Update user
+        if(isset($request->password)){
+            $password = Hash::make($request->password);
+            $user->update(['password' => $password]);
+        }
+        $user->update([
+            'nama'        => $request->nama,
+            'email'       => $request->email,
+            'noHP'        => $request->noHP,
+            'updated_at'  => \Carbon\Carbon::now(),
+        ]);
+
+        //Update user di reports
+        $report->update([
+            'nama'        => $request->nama,
+            'email'       => $request->email,
+            'updated_at'  => \Carbon\Carbon::now(),
+        ]);
+
+        return redirect(route('admin.users'))->with('berhasil', 'Data berhasil diubah !');
+    }
+
+    public function deleteUsers($id)
+    {
+        if (User::destroy($id)) {
+            return redirect(route('admin.users'))->with('berhasil', 'Data berhasil dihapus !');
+        }
+
+        return redirect(route('admin.users'))->with('gagal', 'Data gagal dihapus !');
     }
 
     // public function register(Request $request)

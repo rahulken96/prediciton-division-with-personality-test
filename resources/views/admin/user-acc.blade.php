@@ -26,6 +26,7 @@
                                     <th width="25%">Email</th>
                                     <th width="15%">No. HP</th>
                                     <th width="20%">Tanggal Daftar</th>
+                                    <th width="20%">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -38,15 +39,34 @@
     </div>
     <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
     @php
-    $arrColumn = [
-        'nama' => '',
-        'email' => '',
-        'noHP' => '',
-        'created_at' => '',
-    ];
+        $arrColumn = [
+            'nama' => '',
+            'email' => '',
+            'noHP' => '',
+            'created_at' => '',
+            'action' => 'orderable-false searchable-false',
+        ];
 
-    pagination($arrColumn, url('/admin/akun-pengguna'));
+        pagination($arrColumn, url('/admin/akun-pengguna'));
     @endphp
     @include('components.alert-berhasil-gagal')
+    <script>
+        function hapus(id) {
+            Swal.fire({
+                title: 'Yakin Hapus ?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Hapus !',
+                confirmButtonColor: '#31c48d',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Batal',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.location = `/admin/akun-pengguna/${id}/hapus`;
+                }
+            })
+        }
+    </script>
 </body>
+
 </html>

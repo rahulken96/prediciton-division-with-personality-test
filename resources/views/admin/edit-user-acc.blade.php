@@ -2,7 +2,7 @@
 <html :class="{ 'theme-dark': dark }" x-data="data()" ang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    @include('layout.head', ['title' => 'Profil Pengguna'])
+    @include('layout.head', ['title' => 'Edit Data Penjawab'])
     <link href="{{ asset('css/tailwind.output.css') }}" rel="stylesheet">
 </head>
 
@@ -14,9 +14,9 @@
             <main class="h-full overflow-y-auto">
                 <div class="container px-6 mx-auto grid">
                     <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
-                        Profil Pribadi
+                        Edit Data Penjawab
                     </h2>
-                    <form action="{{ route('users.profile_update') }}" method="post" class="login-form">
+                    <form action="{{ route('admin.user_update', enc($data->id)) }}" method="post" class="login-form">
                         @csrf
                         @method('PUT')
                         <div class="p-auto">
@@ -87,7 +87,7 @@
                                 class="rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">Ubah
                                 Data</button>
                         </div>
-                        <span class="text-red-400 text-xs" role="alert">
+                        <span class="text-red-400 text-xs pb-5" role="alert">
                             <strong>{{ '*Kosongkan password jika tidak ingin diubah.' }} <br> {{ '*Ubah email jika sudah yakin, karena akan mempengaruhi ketika akan masuk /' }} <i>{{ ' login ' }}</i>   {{ 'akun.' }}</strong>
                         </span>
                     </form>

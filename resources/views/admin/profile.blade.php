@@ -27,7 +27,7 @@
                                     <div class="mt-2">
                                         <input type="text" name="nama" id="nama" autocomplete="off"
                                             class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-green-400 focus:outline-none focus:shadow-outline-green dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                                            value="{{ $data->nama }}" placeholder="Masukkan nama">
+                                            value="{{ old('nama', $data->nama) }}" placeholder="Masukkan nama">
                                         @error('nama')
                                             <span class="mt-2 text-red-600 text-sm" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -41,7 +41,7 @@
                                     <div class="mt-2">
                                         <input type="text" name="noHP" id="noHP" autocomplete="family-name"
                                             class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-green-400 focus:outline-none focus:shadow-outline-green dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                                            value="{{ $data->noHP }}" placeholder="Cth: 08123456789" min="12">
+                                            value="{{ old('noHP', $data->noHP) }}" placeholder="Cth: 08123456789" min="12">
                                         @error('noHP')
                                             <span class="mt-2 text-red-600 text-sm" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -56,7 +56,7 @@
                                     <div class="mt-2">
                                         <input type="text" name="email" id="email" autocomplete="off"
                                             class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-green-400 focus:outline-none focus:shadow-outline-green dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                                            value="{{ $data->email }}" placeholder="Masukkan email">
+                                            value="{{ old('email', $data->email) }}" placeholder="Masukkan email">
                                         @error('email')
                                             <span class="mt-2 text-red-600 text-sm" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -87,7 +87,7 @@
                                 class="rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">Ubah
                                 Data</button>
                         </div>
-                        <span class="text-red-400 text-xs" role="alert">
+                        <span class="text-red-400 text-xs pb-5" role="alert">
                             <strong>{{ '*Kosongkan password jika tidak ingin diubah.' }} <br> {{ '*Ubah email jika sudah yakin, karena akan mempengaruhi ketika akan masuk /' }} <i>{{ ' login ' }}</i>   {{ 'akun.' }}</strong>
                         </span>
                     </form>

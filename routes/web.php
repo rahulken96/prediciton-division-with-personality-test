@@ -59,7 +59,11 @@ Route::middleware('auth')->group(function () {
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
         Route::get('/hasil', [AdminController::class, 'report'])->name('report');
+
         Route::get('/akun-pengguna', [AdminController::class, 'users'])->name('users');
+        Route::get('/akun-pengguna/{id}/ubah', [AdminController::class, 'editUsers']);
+        Route::put('/akun-pengguna/{id}', [AdminController::class, 'updateUsers'])->name('user_update');
+        Route::get('/akun-pengguna/{id}/hapus', [AdminController::class, 'deleteUsers']);
 
         Route::get('/profil', [AdminController::class, 'edit'])->name('profile');
         Route::put('/profil', [AdminController::class, 'update'])->name('profile_update');

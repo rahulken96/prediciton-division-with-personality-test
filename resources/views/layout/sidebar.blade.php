@@ -39,6 +39,7 @@
                            <i class="material-icons">manage_accounts</i>
                            <span class="ml-4">Ubah Profil</span>
                        </a>
+
                        {{-- <button @click="openModal"
                            class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-green-600 border border-transparent rounded-lg active:bg-green-600 hover:bg-green-700 focus:outline-none focus:shadow-outline-green">
                            Tambah Admin
@@ -116,13 +117,19 @@
                            </a>
                        </li>
                    </ul>
-                   {{-- <div class="px-6 my-6">
-                       <button @click="openModal"
+                   <div class="px-6 my-6">
+                       <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                           href="{{ route('admin.profile') }}">
+                           <i class="material-icons">manage_accounts</i>
+                           <span class="ml-4">Ubah Profil</span>
+                       </a>
+
+                       {{-- <button @click="openModal"
                            class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-green-600 border border-transparent rounded-lg active:bg-green-600 hover:bg-green-700 focus:outline-none focus:shadow-outline-green">
                            Tambah Admin
                            <span class="ml-2" aria-hidden="true">+</span>
-                       </button>
-                   </div> --}}
+                       </button> --}}
+                   </div>
                @else
                    <span class="text-lg font-bold text-gray-800 dark:text-gray-200">Dashboard</span>
                    <ul class="mt-6">
