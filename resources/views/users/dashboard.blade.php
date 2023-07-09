@@ -5,7 +5,6 @@
     @include('layout.head', ['title' => 'Dashboard Pengguna'])
     <link href="{{ asset('css/tailwind.output.css') }}" rel="stylesheet">
     <link href="{{ asset('css/cdn.datatables.net_1.13.4_css_jquery.dataTables.min.css') }}" rel="stylesheet">
-
 <body>
     <div class="flex h-screen bg-gray-50 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen }">
         @include('layout.sidebar')

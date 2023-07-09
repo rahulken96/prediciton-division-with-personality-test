@@ -65,7 +65,7 @@ function dec($val)
 
 function totalSoal($kepribadian)
 {
-    return Question::where('type', Str::upper($kepribadian))->count('type') ?? '1';
+    return Question::where('type', Str::upper($kepribadian))->count('type') ?? '100';
 }
 
 function itunganSoal($nilai)

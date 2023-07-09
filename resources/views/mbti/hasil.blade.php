@@ -47,7 +47,7 @@
             <tbody>
                 <tr class="mx-20">
                     <td class="text-center border-2 border-cool-gray-500 p-2 text-black">1</td>
-                    <td class="text-center border-2 border-cool-gray-500 p-2 text-black">(I) Inroverts</td>
+                    <td class="text-center border-2 border-cool-gray-500 p-2 text-black">(I) Introverts</td>
                     <td class="text-center border-2 border-cool-gray-500 p-2 text-black">{{ round($I) ?? '0' }}%</td>
                 </tr>
                 <tr>

@@ -91,19 +91,57 @@ class QuestionController extends Controller
             }
         }
 
-        $P = (($P / (totalSoal('P') * 5)) * 100) ?? 0;
-        $I = (($I / (totalSoal('I') * 5)) * 100) ?? 0;
-        $J = (($J / (totalSoal('J') * 5)) * 100) ?? 0;
-        $E = (($E / (totalSoal('E') * 5)) * 100) ?? 0;
-        $T = (($T / (totalSoal('T') * 5)) * 100) ?? 0;
-        $N = (($N / (totalSoal('N') * 5)) * 100) ?? 0;
-        $S = (($S / (totalSoal('S') * 5)) * 100) ?? 0;
-        $F = (($F / (totalSoal('F') * 5)) * 100) ?? 0;
+        $P = (($P / (totalSoal('P') * 5)) * 100);
+        $I = (($I / (totalSoal('I') * 5)) * 100);
+        $J = (($J / (totalSoal('J') * 5)) * 100);
+        $E = (($E / (totalSoal('E') * 5)) * 100);
+        $T = (($T / (totalSoal('T') * 5)) * 100);
+        $N = (($N / (totalSoal('N') * 5)) * 100);
+        $S = (($S / (totalSoal('S') * 5)) * 100);
+        $F = (($F / (totalSoal('F') * 5)) * 100);
 
-        $satu = $I > $E ? "I" : "E";
-        $dua = $N > $S ? "N" : "S";
-        $tiga = $T > $F ? "T" : "F";
-        $empat = $J > $P ? "J" : "P";
+        // $satu = $I > $E ? "I" : "E";
+        // $dua = $N > $S ? "N" : "S";
+        // $tiga = $T > $F ? "T" : "F";
+        // $empat = $J > $P ? "J" : "P";
+
+        /* I > E */
+        if ($I > $E) {
+            $satu = 'I';
+            $E = 100 - round($I);
+        } else {
+            $satu = 'E';
+            $I = 100 - round($E);
+        }
+
+        /* N > S */
+        if ($N > $S) {
+            $dua = 'N';
+            $S = 100 - round($N);
+        } else {
+            $dua = 'S';
+            $N = 100 - round($S);
+        }
+
+        /* T > F */
+        if ($T > $F) {
+            $tiga = 'T';
+            $F = 100 - round($T);
+        } else {
+            $tiga = 'F';
+            $T = 100 - round($F);
+        }
+
+        /* J > P */
+        if ($J > $P) {
+            $empat = 'J';
+            $P = 100 - round($J);
+        } else {
+            $empat = 'P';
+            $J = 100 - round($P);
+        }
+
+
         $hasil = $satu . $dua . $tiga . $empat;
         /* Selesai Proses */
 
