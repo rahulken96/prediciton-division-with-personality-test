@@ -101,7 +101,7 @@
             <p>{{ $email ?? '@?' }}</p>
         </div>
         <div class="flex justify-center mb-20">
-            <input id="backbtn" onclick="window.location='{{ route('home') }}';" class="ml-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="button" value="🏠 Halaman Utama">
+            <input id="backbtn" onclick="window.location='{{ route('users.dashboard') }}';" class="ml-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="button" value="🏠 Dashboard Kamu">
             <input id="printbtn" onclick="window.print();" class="ml-5 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" type="button" value="🖨️ Cetak">
         </div>
     </div>
