@@ -2,6 +2,7 @@
 
 use App\Models\Question;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 
 function pagination($arrColumn, $link)
@@ -105,6 +106,25 @@ function itunganSoal($nilai)
     if ($huruf == 'F') {
         return $F += $angka;
     }
+}
+
+function KNN($I, $E, $N, $S, $T, $F, $J, $P)
+{
+    $data = Http::post(env('URL_API_FLASK') . "/proses/knn", [
+        'I' => $I,
+        'E' => $E,
+        'N' => $N,
+        'S' => $S,
+        'T' => $T,
+        'F' => $F,
+        'J' => $J,
+        'P' => $P,
+    ]);
+    
+    if ($data->successful()) {
+        return $data;
+    }
+    return $data;
 }
 
 ?>

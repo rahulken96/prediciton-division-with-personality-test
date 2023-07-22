@@ -6,10 +6,10 @@ import math
 import numpy as np
 import pandas as pd
 from sqlalchemy import create_engine
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.preprocessing import StandardScaler
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.metrics import accuracy_score, f1_score
+from sklearn.metrics import accuracy_score
 from sklearn import metrics
 
 # ambil data dari db
@@ -19,16 +19,11 @@ username = "root"
 password = ""
 mydb = create_engine(f"mysql+mysqlconnector://{username}:{password}@{host}/{database}")
 
-def dd(self):
-    return jsonify(f"{self}")
-
 @app.route('/', methods=['GET'])
 def index():
-  return 'Halaman index dari venv dalam laravel YEAYYY !! ^_^'
+    return 'Terhubung dengan Venv Flask di Laravel. YEAYYY!! ^_^'
 
-
-""" Dapetin Data """
-@app.route('/post', methods=['POST'])
+@app.route('/ls', methods=['POST'])
 def postData():
   cont = request.json
   data = dict()
@@ -36,16 +31,14 @@ def postData():
   data['divisi'] = cont['role']
   return jsonify(data)
 
-""" Proses KNN """
-@app.route('/get', methods=['GET'])
-def knn():
-    
-    """ query data """
+@app.route('/proses/knn', methods=['POST'])
+def prosesKNN():
+    """ Get Data """
+    req = request.json
+
+    """ Proses KNN """
     query = "SELECT * FROM reports"
     dt = pd.read_sql(query, mydb)
-
-    q = "SELECT * FROM reports ORDER BY id DESC LIMIT 10"
-    last = pd.read_sql(q, mydb)
 
     """ Mengatasi nilai 0 """
     not_zero = ['I', 'E', 'N', 'S', 'T', 'F', 'J', 'P',]
@@ -56,34 +49,82 @@ def knn():
         dt[kolom] = dt[kolom].replace(np.NaN, mean)
 
     """ split dataset """
-    X_train = dt.iloc[:, 4:12]
-    Y_train = dt.iloc[:, 12]
-    return Response(f"{Y_train} {'<br>'}", mimetype='text/plain')
+    X = dt.iloc[:, 4:12].values
+    Y = dt.iloc[:, 12].values
+    X_train, X_test, Y_train, Y_test = train_test_split(X, Y, random_state=0, test_size=0.2)
 
     """ feature scaling """
     sc_X = StandardScaler()
     X_train = sc_X.fit_transform(X_train)
     X_test = sc_X.transform(X_test)
 
-    """ menentukan nilai K dengan cara mengambil nilai "Ganjil" akar dari total kesulurahn data Y_test """
+    """ menentukan nilai K dengan cara mengambil nilai *Ganjil* akar dari total kesulurahn data Y_test """
+    k = math.sqrt(len(Y_train))
     if round(k) % 2 == 0:
-        k = round(k) - 1
+        k = k - 1
     else:
-        k = round(k)
+        k = k
 
-    """ Fit model """
-    classifier = KNeighborsClassifier(n_neighbors=k, p=2, metric='euclidean')
-    classifier.fit(X_train, Y_train)
+    """ Fit model KNN"""
+    knn = KNeighborsClassifier(n_neighbors=round(k), p=2, metric='euclidean')
+    knn.fit(X_train, Y_train)
 
-    """ Hasil prediksi dari data tes """
-    Y_pred = classifier.predict(X_test)
-    return jsonify(f"{Y_pred}")
+    """ Grid Search """
+    k_range = list(range(1, round(k)+1))
+    param_grid = dict(n_neighbors=k_range)
+
+    grid = GridSearchCV(knn, param_grid, scoring='accuracy', return_train_score=False, verbose=1)
+    grid.fit(X_train, Y_train)
+
+    """ Grid Search best params & akurasi """
+    optValue = grid.best_params_
+    gsACC = grid.best_score_ *100
+
+    """ Prediksi terhadap data test dataset """
+    Y_pred = knn.predict(X_test)
 
     """ Evaluasi Model """
-    evalModel = metrics.confusion_matrix(Y_test, Y_pred)
+    cm = metrics.confusion_matrix(Y_test, Y_pred)
 
     """ Cek keakuratan model terhadap data tes """
-    acc = accuracy_score(Y_test, Y_pred) * 100
+    knnACC = accuracy_score(Y_test, Y_pred) * 100
+
+    # ---------------------------------------------------------------------------------
+
+    """ Inisiasi data test request / real data """
+    I = req['I']
+    E = req['E']
+    N = req['N']
+    S = req['S']
+    T = req['T']
+    F = req['F']
+    J = req['J']
+    P = req['P']
+
+    """ sebelum reshape """
+    X_new = np.array([P, I, J, T, E, N, S ,F])
+
+    """ sesudah reshape """
+    X_new = X_new.reshape(1, -1)
+
+    """ Hasil prediksi dari data tes """
+    X_pred_new = knn.predict(X_new)
+
+    if(len(X_pred_new) == 1):
+        response = jsonify({
+            'knnACC' : f'{knnACC}',
+            'gsACC' : f'{gsACC}',
+            'knnPREDICITON' : f'{X_pred_new[0]}',
+            'status': 200,
+        })
+    else:
+        response = jsonify({
+            'hasil' : 'Data Tidak Ditemukan !',
+            'status': 400,
+        })
+
+    return response
+
 
 if __name__ == "__main__":
-    app.run()
+    app.run(port=8005)

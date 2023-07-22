@@ -18,14 +18,14 @@ class CreateReportsTable extends Migration
             $table->unsignedInteger('userID');
             $table->string('nama');
             $table->string('email');
+            $table->integer('P');
             $table->integer('I');
+            $table->integer('J');
+            $table->integer('T');
             $table->integer('E');
             $table->integer('N');
-            $table->integer('S');
-            $table->integer('T');
             $table->integer('F');
-            $table->integer('J');
-            $table->integer('P');
+            $table->integer('S');
             $table->char('result', 4);
             $table->timestamps();
         });
