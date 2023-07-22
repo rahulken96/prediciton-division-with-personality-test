@@ -22,10 +22,6 @@ use App\Models\Result;
 */
 Route::get('/', [QuestionController::class, 'index'])->name('home')->withoutMiddleware('auth');
 
-// Route::get('/test', function(){
-
-// });
-
 Route::middleware('auth')->group(function () {
     Route::get('/masuk', [UserController::class, 'index'])->name('login')->withoutMiddleware('auth');
     Route::post('/masuk', [UserController::class, 'login'])->withoutMiddleware('auth');

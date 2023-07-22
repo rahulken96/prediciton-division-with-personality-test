@@ -100,10 +100,10 @@ class QuestionController extends Controller
         $S = (($S / (totalSoal('S') * 5)) * 100);
         $F = (($F / (totalSoal('F') * 5)) * 100);
 
-        // $satu = $I > $E ? "I" : "E";
-        // $dua = $N > $S ? "N" : "S";
-        // $tiga = $T > $F ? "T" : "F";
-        // $empat = $J > $P ? "J" : "P";
+        /* Implementasi KNN */
+        $knn = KNN($I, $E, $N, $S, $T, $F, $J, $P);
+        $hasil = $knn['knnPREDICITON'];
+        /* End */
 
         /* I > E */
         if ($I > $E) {
@@ -141,8 +141,6 @@ class QuestionController extends Controller
             $J = 100 - round($P);
         }
 
-
-        $hasil = $satu . $dua . $tiga . $empat;
         /* Selesai Proses */
 
         /* Proses Inisiasi Data */
