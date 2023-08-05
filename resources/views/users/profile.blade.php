@@ -51,8 +51,7 @@
                                 </div>
 
                                 <div class="col-span-2 sm:col-span-4">
-                                    <label for="email"
-                                        class="block text-sm font-medium leading-6 text-gray-900">Email</label>
+                                    <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email</label>
                                     <div class="mt-2">
                                         <input type="text" name="email" id="email" autocomplete="off"
                                             class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-green-400 focus:outline-none focus:shadow-outline-green dark:text-gray-300 dark:focus:shadow-outline-gray form-input"

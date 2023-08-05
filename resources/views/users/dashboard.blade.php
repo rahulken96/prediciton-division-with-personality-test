@@ -16,7 +16,7 @@
                         Halo, {{ explode(' ', Auth::user()->nama)[0] ?? '' }} !
                     </h2>
                     <!-- Cards -->
-                    <div class="grid gap-3 mb-8 md:grid-cols-3 xl:grid-cols-3 border-b border-gray-900/10 pb-10">
+                    <div class="grid gap-3 mb-8 md:grid-cols-3 xl:grid-cols-3 border-gray-900/10 pb-10">
                         <!-- Card -->
                         <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
                             <div class="p-3 mr-4 text-green-500 dark:text-green-300">

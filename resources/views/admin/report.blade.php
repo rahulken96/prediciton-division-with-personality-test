@@ -26,7 +26,7 @@
                                     <th width="20%">Email</th>
                                     <th width="15%">Tipe MBTI</th>
                                     <th width="25%">Tanggal Tes</th>
-                                    <th width="15%">Action</th>
+                                    <th width="15%">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>

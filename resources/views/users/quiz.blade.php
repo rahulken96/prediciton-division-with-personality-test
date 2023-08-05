@@ -109,17 +109,6 @@
                     </div>
                 </div>
             </form>
-            {{-- <footer class="footer bg-white relative border-b-2 border-indigo-700">
-                <div class="container mx-auto">
-                    <div class="mt-16 border-t-2 border-gray-300 flex flex-col items-center">
-                        <div class="sm:w-2/3 text-center py-6">
-                            <p class="text-sm text-indigo-700 font-bold mb-2">
-                                © {{ date('Y') }} by TI UIN Walisongo
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </footer> --}}
         </div>
         <!-- Swiper JS -->
         <script src="{{ asset('js/swiper-bundle.min.js') }}"></script>
