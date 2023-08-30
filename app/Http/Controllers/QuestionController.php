@@ -62,8 +62,8 @@ class QuestionController extends Controller
 
         /* Proses Hitung Data */
         foreach ($request as $value) {
-            $huruf = substr(Str::upper($value), 1, 2);
             $angka = substr(Str::upper($value), 0, 1);
+            $huruf = substr(Str::upper($value), 1, 2);
 
             if ($huruf == 'P') {
                 $P += $angka;
@@ -100,48 +100,56 @@ class QuestionController extends Controller
         $S = (($S / (totalSoal('S') * 5)) * 100);
         $F = (($F / (totalSoal('F') * 5)) * 100);
 
-        /* Implementasi KNN */
-        $knn = KNN($I, $E, $N, $S, $T, $F, $J, $P);
-        $hasil = $knn['knnPREDICITON'];
-        /* End */
+        $I0 = $I;
+        $E0 = $E;
+        $N0 = $N;
+        $S0 = $S;
+        $T0 = $T;
+        $F0 = $F;
+        $J0 = $J;
+        $P0 = $P;
 
         /* I > E */
         if ($I > $E) {
-            $satu = 'I';
             $E = 100 - round($I);
-        } else {
-            $satu = 'E';
+        } elseif($E > $I) {
             $I = 100 - round($E);
+        } else {
+            $I = $E;
         }
 
         /* N > S */
         if ($N > $S) {
-            $dua = 'N';
             $S = 100 - round($N);
-        } else {
-            $dua = 'S';
+        } elseif($S > $N) {
             $N = 100 - round($S);
+        } else {
+            $S = $N;
         }
 
         /* T > F */
         if ($T > $F) {
-            $tiga = 'T';
             $F = 100 - round($T);
-        } else {
-            $tiga = 'F';
+        } elseif($F > $T) {
             $T = 100 - round($F);
+        } else {
+            $F = $T;
         }
 
         /* J > P */
         if ($J > $P) {
-            $empat = 'J';
             $P = 100 - round($J);
-        } else {
-            $empat = 'P';
+        } elseif($P > $J) {
             $J = 100 - round($P);
+        } else {
+            $J = $P;
         }
-
         /* Selesai Proses */
+
+        /* Implementasi KNN */
+        $knn = KNN($I, $E, $N, $S, $T, $F, $J, $P);
+        $hasil = $knn['knnPREDICITON'];
+        /* End */
 
         /* Proses Inisiasi Data */
         $reports = new Report();
@@ -152,14 +160,14 @@ class QuestionController extends Controller
         $reports->nama  = (!empty($nama) || $nama != null ? $nama : '?');
         $reports->email = (!empty($email) || $email != null ? $email : '?');
         $reports->userID = (!empty($id) || $id != null ? $id : 0);
-        $reports->P     = $P;
-        $reports->I     = $I;
-        $reports->J     = $J;
-        $reports->E     = $E;
-        $reports->T     = $T;
-        $reports->N     = $N;
-        $reports->S     = $S;
-        $reports->F     = $F;
+        $reports->P     = $P0;
+        $reports->I     = $I0;
+        $reports->J     = $J0;
+        $reports->E     = $E0;
+        $reports->T     = $T0;
+        $reports->N     = $N0;
+        $reports->S     = $S0;
+        $reports->F     = $F0;
         $reports->result = $hasil;
 
         $penjelasan = Result::where('mbti', $hasil)->first();
@@ -168,14 +176,14 @@ class QuestionController extends Controller
             'email'      => $email,
             'hasil'      => $hasil,
             'penjelasan' => $penjelasan,
-            'P'          => $P,
-            'I'          => $I,
-            'J'          => $J,
-            'T'          => $T,
-            'E'          => $E,
-            'N'          => $N,
-            'S'          => $S,
-            'F'          => $F
+            'P'          => $P0,
+            'I'          => $I0,
+            'J'          => $J0,
+            'T'          => $T0,
+            'E'          => $E0,
+            'N'          => $N0,
+            'S'          => $S0,
+            'F'          => $F0,
         ];
 
         /* Selesai, setelah itu pengecekan data untuk disimpan */

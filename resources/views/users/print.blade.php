@@ -93,8 +93,6 @@
         </div>
         <p class="text-black"><b>Profesi</b> : {{ $ket['profesi'] ?? 'NULL' }}</p>
         <p class="text-black"><b>Partner</b> : {{ $ket['partner'] ?? 'NULL' }}</p>
-        <p class="text-black"><b>Tokoh Terkenal</b> : {{ $ket['tokoh_terkenal'] ?? 'NULL' }}</p>
-        <p class="text-black"><b>Sumber : </b><a class="italic" href="https://campuspedia.id/news/mengenal-16-tipe-kepribadian-mbti-lebih-dalam-part-1/" target="_blank" rel="noopener noreferrer">campuspedia.id</a></p>
         <div class="text-right text-black">
             <p class="pb-16">{{ now()->format('d M Y') }}</p>
             <p>{{ $tes['nama'] ?? '?' }}</p>

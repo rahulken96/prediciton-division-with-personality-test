@@ -51,7 +51,7 @@ def prosesKNN():
     """ split dataset """
     X = dt.iloc[:, 4:12].values
     Y = dt.iloc[:, 12].values
-    X_train, X_test, Y_train, Y_test = train_test_split(X, Y, random_state=0, test_size=0.2)
+    X_train, X_test, Y_train, Y_test = train_test_split(X, Y, random_state=0)
 
     """ feature scaling """
     sc_X = StandardScaler()
@@ -59,29 +59,34 @@ def prosesKNN():
     X_test = sc_X.transform(X_test)
 
     """ menentukan nilai K dengan cara mengambil nilai *Ganjil* akar dari total kesulurahn data Y_test """
-    k = math.sqrt(len(Y_train))
+    k = math.sqrt(len(Y_test))
     if round(k) % 2 == 0:
-        k = k - 1
+        k = round(k) - 1
     else:
-        k = k
+        k = round(k)
 
-    """ Fit model KNN"""
-    knn = KNeighborsClassifier(n_neighbors=round(k), p=2, metric='euclidean')
+    """ Fit model KNN Tanpa Tuning"""
+    knn = KNeighborsClassifier(n_neighbors=k, metric='euclidean')
     knn.fit(X_train, Y_train)
 
     """ Grid Search """
-    k_range = list(range(1, round(k)+1))
+    k_range = list(range(1, len(Y_train)+1))
     param_grid = dict(n_neighbors=k_range)
 
-    grid = GridSearchCV(knn, param_grid, scoring='accuracy', return_train_score=False, verbose=1)
+    grid = GridSearchCV(knn, param_grid, scoring='accuracy')
     grid.fit(X_train, Y_train)
 
     """ Grid Search best params & akurasi """
     optValue = grid.best_params_
     gsACC = grid.best_score_ *100
 
+    """ Fit model KNN setelah Tuning """
+    k_optimal = optValue['n_neighbors']
+    knn_grid = KNeighborsClassifier(n_neighbors=k_optimal, metric='euclidean')
+    knn_grid.fit(X, Y)
+
     """ Prediksi terhadap data test dataset """
-    Y_pred = knn.predict(X_test)
+    Y_pred = knn_grid.predict(X_test)
 
     """ Evaluasi Model """
     cm = metrics.confusion_matrix(Y_test, Y_pred)
@@ -108,12 +113,13 @@ def prosesKNN():
     X_new = X_new.reshape(1, -1)
 
     """ Hasil prediksi dari data tes """
-    X_pred_new = knn.predict(X_new)
+    X_pred_new = knn_grid.predict(X_new)
 
     if(len(X_pred_new) == 1):
         response = jsonify({
             'knnACC' : f'{knnACC}',
             'gsACC' : f'{gsACC}',
+            'optVal' : f'{optValue}',
             'knnPREDICITON' : f'{X_pred_new[0]}',
             'status': 200,
         })

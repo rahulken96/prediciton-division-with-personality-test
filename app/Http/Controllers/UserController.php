@@ -208,7 +208,7 @@ class UserController extends Controller
         $request->validate([
             'nama'      => 'required|string',
             'noHP'      => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:12',
-            'email'     => 'required|email:rfc,dns',
+            'email'     => 'required',
             'password'  => 'required',
         ],[
             'nama.required'     => 'Nama Wajib Diisi !',
@@ -217,7 +217,7 @@ class UserController extends Controller
             'noHP.regex'        => 'Harap Mengisi Format No. HP Dengan Benar !',
             'noHP.min'          => 'No. HP Minimal 12 Digit Nomor !',
             'email.required'    => 'Email Wajib Diisi !',
-            'email.email'       => 'Harap Mengisi Email Dengan Benar !',
+            // 'email.email'       => 'Harap Mengisi Email Dengan Benar !',
             'password.required' => 'Password Wajib Diisi !',
         ]);
 

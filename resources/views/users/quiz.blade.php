@@ -36,12 +36,14 @@
                     <div class="w-full overflow-x-auto">
                         <div class="swiper swiper-container mySwiper">
                             <div class="swiper-wrapper">
-                                {{-- <div class="flex h-screen items-center">
-                                    <a href="{{ route('home') }}"
-                                        class="transform transition duration-500 hover:scale-105 hover:-translate-y-1 bg-blue-600 hover:scale-11 hover:bg-blue-800 text-white py-3 px-6 rounded-md">
-                                        ↩️ Kembali
-                                    </a>
-                                </div> --}}
+                                <div class="swiper-slide">
+                                    <div class="flex justify-center w-full h-screen items-center">
+                                        <a href="{{ route('home') }}"
+                                            class="transform transition duration-500 hover:scale-105 hover:-translate-y-1 bg-blue-600 hover:scale-11 hover:bg-blue-800 text-white py-3 px-6 rounded-md">
+                                            ↩️ Kembali
+                                        </a>
+                                    </div>
+                                </div>
                                 @php
                                     $begin = 0;
                                     $no = 1;
@@ -54,20 +56,10 @@
                                                     <p class="my-5">
                                                         {{ $no++ }}. {{ $question->pernyataan }}
                                                     </p>
-                                                    <label for="" style="color: #00bf4c">Sangat Setuju</label>
+                                                    <label for="" style="color: #bf0d00">Sangat Tidak Setuju</label>
                                                     <label class="custom-radio-btn">
                                                         <input type="radio" name="{{ $question->id }}"
-                                                            id="{{ $question->type }}" value="5{{ $question->type }}">
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                    <label class="custom-radio-btn">
-                                                        <input type="radio" name="{{ $question->id }}"
-                                                            id="{{ $question->type }}" value="4{{ $question->type }}">
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                    <label class="custom-radio-btn">
-                                                        <input type="radio" name="{{ $question->id }}"
-                                                            id="{{ $question->type }}" value="3{{ $question->type }}">
+                                                            id="{{ $question->type }}" value="1{{ $question->type }}">
                                                         <span class="checkmark"></span>
                                                     </label>
                                                     <label class="custom-radio-btn">
@@ -77,11 +69,20 @@
                                                     </label>
                                                     <label class="custom-radio-btn">
                                                         <input type="radio" name="{{ $question->id }}"
-                                                            id="{{ $question->type }}" value="1{{ $question->type }}">
+                                                            id="{{ $question->type }}" value="3{{ $question->type }}">
                                                         <span class="checkmark"></span>
                                                     </label>
-                                                    <label for="" style="color: #bf0d00" class="ml-3">Sangat
-                                                        Tidak Setuju</label>
+                                                    <label class="custom-radio-btn">
+                                                        <input type="radio" name="{{ $question->id }}"
+                                                            id="{{ $question->type }}" value="4{{ $question->type }}">
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                    <label class="custom-radio-btn">
+                                                        <input type="radio" name="{{ $question->id }}"
+                                                            id="{{ $question->type }}" value="5{{ $question->type }}">
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                    <label for="" style="color: #00bf4c" class="ml-3">Sangat Setuju</label>
                                                 </div>
                                             </div>
                                         @endforeach
@@ -122,6 +123,7 @@
                     nextEl: '.swiper-button-next',
                     prevEl: '.swiper-button-prev',
                 },
+                initialSlide: 1,
             });
         </script>
         @if (session('info'))
