@@ -1,9 +1,9 @@
-from flask import Flask, render_template, request, Response, json, jsonify
+from flask import Flask, request, Response, json, jsonify
 
 # inisiasi nama file
 app = Flask('main')
 app.config.update(
-    SECRET_KEY='cbccb8d102517992ff1ad412d4bc89eedb6420c15f228dc12813d13842f1b488',
+    SECRET_KEY='aQ3IoxkYCESH1JcgWu2PKOH3Pj7UgiYF8P82gfyDuqMmRix54Rs0pvP8kLBBlJt3',
     DEBUG=True,
     JSONIFY_PRETTYPRINT_REGULAR=True,
 )
