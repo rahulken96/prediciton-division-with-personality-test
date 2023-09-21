@@ -133,4 +133,4 @@ def prosesKNN():
 
 
 if __name__ == "__main__":
-    app.run(port=8005)
+    app.run(debug=False, port=8005)
