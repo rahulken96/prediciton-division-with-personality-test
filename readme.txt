@@ -2,7 +2,8 @@ Halo Semua !!, Aplikasi ini menggunakan 2 framework yang berbeda yaitu (Laravel 
 maka dari itu kita perlu menjalankan 2 framework tersebut secara bersamaan.
 Berikut saya akan memberikan cara menggunakan aplikasi Ini :
 
-[1.] Buatlah file .env dan sesuaikan dengan environment database yang akan digunakan pada Laravel, contoh (Mysql):
+[1.] Buatlah file .env dan sesuaikan dengan environment database yang akan digunakan pada Laravel, contoh (Mysql) :
+
 
     DB_CONNECTION=mysql
     DB_HOST=127.0.0.1
@@ -10,6 +11,8 @@ Berikut saya akan memberikan cara menggunakan aplikasi Ini :
     DB_DATABASE=laravel
     DB_USERNAME=root
     DB_PASSWORD=
+
+    *Tambahkan pula "URL_API_FLASK=localhost:8005" dipaling atas file .env nya*
 
 [2.] Setup juga untuk environtment database pada Flask, terletak pada folder venv/main.py
 
